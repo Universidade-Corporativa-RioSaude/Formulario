@@ -3,669 +3,4091 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Formulário de Planejamento de Ação Formativa — UCRioSaúde</title>
+
 <style>
-:root{--teal:#006B6B;--teal-dark:#004D4D;--navy:#1A2B4A;--gold:#F5A623;--white:#fff;--gray:#F5F7F9;--text:#202124;--muted:#5f6368;--border:#dadce0;--all-bg:#DFF0F0;--all-txt:#005050;--sync-bg:#FFF8E0;--sync-txt:#7A5500;--async-bg:#E6F4E6;--async-txt:#2E6B30;--cond-bg:#FFF0EC;--cond-txt:#7A2E00}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',Arial,sans-serif;background:#EFF3F8;min-height:100vh;font-size:14px;color:var(--text)}
+:root{
+  --teal:#006B6B;
+  --teal-dark:#004D4D;
+  --navy:#1A2B4A;
+  --gold:#F5A623;
+  --white:#fff;
+  --gray:#F5F7F9;
+  --text:#202124;
+  --muted:#5f6368;
+  --border:#dadce0;
+  --all-bg:#DFF0F0;
+  --all-txt:#005050;
+  --sync-bg:#FFF8E0;
+  --sync-txt:#7A5500;
+  --async-bg:#E6F4E6;
+  --async-txt:#2E6B30;
+  --cond-bg:#FFF0EC;
+  --cond-txt:#7A2E00;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:'Segoe UI',Arial,sans-serif;
+  background:#EFF3F8;
+  min-height:100vh;
+  font-size:14px;
+  color:var(--text);
+}
+
 /* HEADER */
-#hdr{background:var(--navy);padding:0 24px;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.3)}
-.hdr-in{max-width:820px;margin:0 auto;padding:12px 0;display:flex;align-items:center;gap:14px}
-.hdr-logo{width:40px;height:40px;background:var(--teal);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-.hdr-sub{color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
-.hdr-ttl{color:#fff;font-size:15px;font-weight:600}
-.hdr-tag{margin-left:auto;color:rgba(255,255,255,.35);font-size:11px;white-space:nowrap}
-#prog-wrap{max-width:820px;margin:0 auto;padding-bottom:10px;display:none}
-#prog-bar{display:flex;gap:4px;margin-bottom:4px}
-.prog-seg{height:4px;border-radius:2px;flex:1;background:rgba(255,255,255,.18);transition:background .3s}
-.prog-seg.on{background:var(--teal)}
-#prog-lbl{color:rgba(255,255,255,.45);font-size:11px}
+
+#hdr{
+  background:var(--navy);
+  padding:0 24px;
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:0 2px 8px rgba(0,0,0,.3);
+}
+
+.hdr-in{
+  max-width:820px;
+  margin:0 auto;
+  padding:12px 0;
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.hdr-logo{
+  width:40px;
+  height:40px;
+  background:var(--teal);
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  flex-shrink:0;
+}
+
+.hdr-sub{
+  color:var(--gold);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+}
+
+.hdr-ttl{
+  color:#fff;
+  font-size:15px;
+  font-weight:600;
+}
+
+.hdr-tag{
+  margin-left:auto;
+  color:rgba(255,255,255,.35);
+  font-size:11px;
+  white-space:nowrap;
+}
+
+#prog-wrap{
+  max-width:820px;
+  margin:0 auto;
+  padding-bottom:10px;
+  display:none;
+}
+
+#prog-bar{
+  display:flex;
+  gap:4px;
+  margin-bottom:4px;
+}
+
+.prog-seg{
+  height:4px;
+  border-radius:2px;
+  flex:1;
+  background:rgba(255,255,255,.18);
+  transition:background .3s;
+}
+
+.prog-seg.on{
+  background:var(--teal);
+}
+
+#prog-lbl{
+  color:rgba(255,255,255,.45);
+  font-size:11px;
+}
+
 /* MAIN */
-#main{max-width:820px;margin:0 auto;padding:20px 16px 110px}
+
+#main{
+  max-width:820px;
+  margin:0 auto;
+  padding:20px 16px 110px;
+}
+
 /* FLOW MAP */
-#flow-map{background:#fff;border-radius:10px;padding:16px 20px;box-shadow:0 1px 8px rgba(0,0,0,.07);margin-bottom:18px}
-.flow-ttl{font-size:12px;font-weight:700;color:var(--navy);margin-bottom:10px;text-transform:uppercase;letter-spacing:.4px}
-#flow-steps{display:flex;align-items:center;flex-wrap:wrap;gap:5px}
-.fs{padding:4px 11px;border-radius:16px;font-size:12px;font-weight:600;border:1.5px solid transparent;white-space:nowrap;transition:all .2s}
-.fs.active{border-color:var(--teal);background:var(--all-bg);color:var(--teal-dark)}
-.fs.done{background:var(--teal);color:#fff;border-color:var(--teal)}
-.fs.pending{background:#F3F3F3;color:#BBBBB;border-color:#E8E8E8}
-.farrow{color:#CCC;font-size:13px}
+
+#flow-map{
+  background:#fff;
+  border-radius:10px;
+  padding:16px 20px;
+  box-shadow:0 1px 8px rgba(0,0,0,.07);
+  margin-bottom:18px;
+}
+
+.flow-ttl{
+  font-size:12px;
+  font-weight:700;
+  color:var(--navy);
+  margin-bottom:10px;
+  text-transform:uppercase;
+  letter-spacing:.4px;
+}
+
+#flow-steps{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:5px;
+}
+
+.fs{
+  padding:4px 11px;
+  border-radius:16px;
+  font-size:12px;
+  font-weight:600;
+  border:1.5px solid transparent;
+  white-space:nowrap;
+  transition:all .2s;
+}
+
+.fs.active{
+  border-color:var(--teal);
+  background:var(--all-bg);
+  color:var(--teal-dark);
+}
+
+.fs.done{
+  background:var(--teal);
+  color:#fff;
+  border-color:var(--teal);
+}
+
+.fs.pending{
+  background:#F3F3F3;
+  color:#BBBBBB;
+  border-color:#E8E8E8;
+}
+
+.farrow{
+  color:#CCC;
+  font-size:13px;
+}
+
 /* SECTION CARD */
-.sec-head{background:var(--navy);border-radius:10px 10px 0 0;padding:18px 22px;display:flex;align-items:center;gap:14px}
-.sec-num{background:var(--teal);border-radius:7px;width:50px;height:50px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:19px;flex-shrink:0}
-.sec-ttl{color:#fff;font-size:18px;font-weight:700;margin-bottom:4px}
-.sec-sub{color:rgba(255,255,255,.55);font-size:12px;font-style:italic;margin-bottom:7px}
-.badge{display:inline-block;padding:3px 11px;border-radius:11px;font-size:11px;font-weight:700}
-.b-all{background:var(--all-bg);color:var(--all-txt)}
-.b-sync{background:var(--sync-bg);color:var(--sync-txt)}
-.b-async{background:var(--async-bg);color:var(--async-txt)}
-.b-cond{background:var(--cond-bg);color:var(--cond-txt)}
-.sec-body{background:#fff;border-radius:0 0 10px 10px;padding:24px 26px 28px;box-shadow:0 2px 10px rgba(0,0,0,.07);margin-bottom:14px}
+
+.sec-head{
+  background:var(--navy);
+  border-radius:10px 10px 0 0;
+  padding:18px 22px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.sec-num{
+  background:var(--teal);
+  border-radius:7px;
+  width:50px;
+  height:50px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-weight:700;
+  font-size:19px;
+  flex-shrink:0;
+}
+
+.sec-ttl{
+  color:#fff;
+  font-size:18px;
+  font-weight:700;
+  margin-bottom:4px;
+}
+
+.sec-sub{
+  color:rgba(255,255,255,.55);
+  font-size:12px;
+  font-style:italic;
+  margin-bottom:7px;
+}
+
+.badge{
+  display:inline-block;
+  padding:3px 11px;
+  border-radius:11px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.b-all{
+  background:var(--all-bg);
+  color:var(--all-txt);
+}
+
+.b-sync{
+  background:var(--sync-bg);
+  color:var(--sync-txt);
+}
+
+.b-async{
+  background:var(--async-bg);
+  color:var(--async-txt);
+}
+
+.b-cond{
+  background:var(--cond-bg);
+  color:var(--cond-txt);
+}
+
+.sec-body{
+  background:#fff;
+  border-radius:0 0 10px 10px;
+  padding:24px 26px 28px;
+  box-shadow:0 2px 10px rgba(0,0,0,.07);
+  margin-bottom:14px;
+}
+
 /* FIELDS */
-.field{margin-bottom:20px}
-.flabel{font-size:14px;font-weight:500;color:var(--text);margin-bottom:5px}
-.flabel .req{color:#d93025;margin-left:3px}
-.fhelp{font-size:12px;color:var(--muted);margin-bottom:7px;line-height:1.55;white-space:pre-line}
-.field input[type=text],.field input[type=email],.field input[type=date],.field input[type=number]{width:100%;padding:8px 0;border:none;border-bottom:1px solid var(--border);outline:none;font-size:14px;font-family:inherit;background:transparent;color:var(--text);transition:border-color .2s}
-.field input:focus,.field textarea:focus{border-color:var(--teal)}
-.field textarea{width:100%;padding:8px 0;border:none;border-bottom:1px solid var(--border);outline:none;font-size:14px;font-family:inherit;background:transparent;color:var(--text);resize:vertical;min-height:76px;transition:border-color .2s}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+
+.field{
+  margin-bottom:20px;
+}
+
+.flabel{
+  font-size:14px;
+  font-weight:500;
+  color:var(--text);
+  margin-bottom:5px;
+}
+
+.flabel .req{
+  color:#d93025;
+  margin-left:3px;
+}
+
+.fhelp{
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:7px;
+  line-height:1.55;
+  white-space:pre-line;
+}
+
+.field input[type=text],
+.field input[type=email],
+.field input[type=date],
+.field input[type=number]{
+  width:100%;
+  padding:8px 0;
+  border:none;
+  border-bottom:1px solid var(--border);
+  outline:none;
+  font-size:14px;
+  font-family:inherit;
+  background:transparent;
+  color:var(--text);
+  transition:border-color .2s;
+}
+
+.field input:focus,
+.field textarea:focus{
+  border-color:var(--teal);
+}
+
+.field textarea{
+  width:100%;
+  padding:8px 0;
+  border:none;
+  border-bottom:1px solid var(--border);
+  outline:none;
+  font-size:14px;
+  font-family:inherit;
+  background:transparent;
+  color:var(--text);
+  resize:vertical;
+  min-height:76px;
+  transition:border-color .2s;
+}
+
+.g2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+.g3{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:16px;
+}
+
 /* RADIO */
-.ropt{display:flex;align-items:flex-start;gap:10px;margin-bottom:9px;cursor:pointer}
-.ropt input[type=radio]{margin-top:2px;accent-color:var(--teal);width:15px;height:15px;flex-shrink:0;cursor:pointer}
-.ropt-lbl{font-size:14px;color:var(--text)}
-.ropt-desc{font-size:12px;color:var(--muted);margin-top:2px}
+
+.ropt{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  margin-bottom:9px;
+  cursor:pointer;
+}
+
+.ropt input[type=radio]{
+  margin-top:2px;
+  accent-color:var(--teal);
+  width:15px;
+  height:15px;
+  flex-shrink:0;
+  cursor:pointer;
+}
+
+.ropt-lbl{
+  font-size:14px;
+  color:var(--text);
+}
+
+.ropt-desc{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:2px;
+}
+
 /* ROUTE HINT */
-.rhint{display:none;margin-top:9px;padding:7px 13px;background:#E8F0FE;border-radius:5px;font-size:13px;color:#1967D2;border-left:3px solid #4285F4}
+
+.rhint{
+  display:none;
+  margin-top:9px;
+  padding:7px 13px;
+  background:#E8F0FE;
+  border-radius:5px;
+  font-size:13px;
+  color:#1967D2;
+  border-left:3px solid #4285F4;
+}
+
 /* INFO BOX */
-.ibox{display:flex;gap:11px;padding:11px 15px;border-radius:7px;margin-bottom:18px;font-size:13px;line-height:1.5}
-.ibox .ic{font-size:19px;flex-shrink:0}
-.ibox.sync{background:var(--sync-bg);color:var(--sync-txt);border:1px solid #FFE082}
-.ibox.async{background:var(--async-bg);color:var(--async-txt);border:1px solid #A5D6A7}
-.ibox.cond{background:var(--cond-bg);color:var(--cond-txt);border:1px solid #FFAB91}
-.ibox.info{background:var(--all-bg);color:var(--all-txt);border:1px solid #80DEEA}
-.ibox.tip{background:#FFF9E6;color:#7A5500;border:1px solid #FFE082}
-hr.div{border:none;border-top:1px solid #EBEBEB;margin:18px 0}
-.sub-ttl{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:12px;padding-bottom:5px;border-bottom:2px solid var(--teal);display:inline-block}
-.cond-blk{display:none;padding:14px;background:#FAFAFA;border-radius:7px;border:1px solid #E4E4E4;margin-top:10px}
-.cond-blk.show{display:block}
-/* Q BLOCKS */
-.q-blk{margin-bottom:12px;padding:13px;background:#FAFAFA;border-radius:7px;border:1px solid #E8E8E8}
-.q-blk-lbl{font-size:13px;font-weight:600;color:var(--navy);margin-bottom:7px}
-.q-blk textarea{width:100%;padding:8px;border:1px solid #E0E0E0;border-radius:4px;font-size:13px;font-family:monospace;resize:vertical;min-height:88px;color:#333;background:#fff}
-.q-blk textarea:focus{outline:none;border-color:var(--teal)}
+
+.ibox{
+  display:flex;
+  gap:11px;
+  padding:11px 15px;
+  border-radius:7px;
+  margin-bottom:18px;
+  font-size:13px;
+  line-height:1.5;
+}
+
+.ibox .ic{
+  font-size:19px;
+  flex-shrink:0;
+}
+
+.ibox.sync{
+  background:var(--sync-bg);
+  color:var(--sync-txt);
+  border:1px solid #FFE082;
+}
+
+.ibox.async{
+  background:var(--async-bg);
+  color:var(--async-txt);
+  border:1px solid #A5D6A7;
+}
+
+.ibox.cond{
+  background:var(--cond-bg);
+  color:var(--cond-txt);
+  border:1px solid #FFAB91;
+}
+
+.ibox.info{
+  background:var(--all-bg);
+  color:var(--all-txt);
+  border:1px solid #80DEEA;
+}
+
+.ibox.tip{
+  background:#FFF9E6;
+  color:#7A5500;
+  border:1px solid #FFE082;
+}
+
+hr.div{
+  border:none;
+  border-top:1px solid #EBEBEB;
+  margin:18px 0;
+}
+
+.sub-ttl{
+  font-size:13px;
+  font-weight:700;
+  color:var(--navy);
+  margin-bottom:12px;
+  padding-bottom:5px;
+  border-bottom:2px solid var(--teal);
+  display:inline-block;
+}
+
+.cond-blk{
+  display:none;
+  padding:14px;
+  background:#FAFAFA;
+  border-radius:7px;
+  border:1px solid #E4E4E4;
+  margin-top:10px;
+}
+
+.cond-blk.show{
+  display:block;
+}
+
+/* QUESTIONS */
+
+.q-blk{
+  margin-bottom:12px;
+  padding:13px;
+  background:#FAFAFA;
+  border-radius:7px;
+  border:1px solid #E8E8E8;
+}
+
+.q-blk-lbl{
+  font-size:13px;
+  font-weight:600;
+  color:var(--navy);
+  margin-bottom:7px;
+}
+
+.q-blk textarea{
+  width:100%;
+  padding:8px;
+  border:1px solid #E0E0E0;
+  border-radius:4px;
+  font-size:13px;
+  font-family:monospace;
+  resize:vertical;
+  min-height:88px;
+  color:#333;
+  background:#fff;
+}
+
+.q-blk textarea:focus{
+  outline:none;
+  border-color:var(--teal);
+}
+
 /* UPLOAD */
-.upload-ph{padding:11px 14px;background:#fff;border:1.5px dashed #C0C0C0;border-radius:6px;font-size:12px;color:var(--muted);margin-top:9px;line-height:1.6}
-code{background:#E0F0F0;padding:1px 5px;border-radius:3px;font-size:12px}
-/* SIG BLOCK */
-.sig-blk{padding:16px;background:#F8F8F8;border-radius:8px;border:1px solid #E4E4E4;margin-bottom:14px}
-.sig-blk-ttl{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:12px;padding-bottom:7px;border-bottom:1px solid #E4E4E4}
+
+.upload-ph{
+  padding:11px 14px;
+  background:#fff;
+  border:1.5px dashed #C0C0C0;
+  border-radius:6px;
+  font-size:12px;
+  color:var(--muted);
+  margin-top:9px;
+  line-height:1.6;
+}
+
+code{
+  background:#E0F0F0;
+  padding:1px 5px;
+  border-radius:3px;
+  font-size:12px;
+}
+
+/* SIGNATURE */
+
+.sig-blk{
+  padding:16px;
+  background:#F8F8F8;
+  border-radius:8px;
+  border:1px solid #E4E4E4;
+  margin-bottom:14px;
+}
+
+.sig-blk-ttl{
+  font-size:13px;
+  font-weight:700;
+  color:var(--navy);
+  margin-bottom:12px;
+  padding-bottom:7px;
+  border-bottom:1px solid #E4E4E4;
+}
+
 /* NAV BAR */
-#nav-bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--border);padding:12px 24px;display:flex;justify-content:space-between;align-items:center;z-index:200;box-shadow:0 -2px 10px rgba(0,0,0,.07)}
-.nav-info{font-size:12px;color:var(--muted);text-align:center}
-.nav-info strong{color:var(--navy);display:block;font-size:13px}
-.btn{padding:10px 26px;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;border:none;transition:all .2s;font-family:inherit}
-.btn-back{background:transparent;border:1.5px solid var(--teal);color:var(--teal)}
-.btn-back:hover{background:var(--all-bg)}
-.btn-next{background:var(--teal);color:#fff;box-shadow:0 2px 6px rgba(0,107,107,.3)}
-.btn-next:hover{background:var(--teal-dark)}
-.btn-next:disabled{background:#B8CCCC;box-shadow:none;cursor:not-allowed}
+
+#nav-bar{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#fff;
+  border-top:1px solid var(--border);
+  padding:12px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:200;
+  box-shadow:0 -2px 10px rgba(0,0,0,.07);
+}
+
+.nav-info{
+  font-size:12px;
+  color:var(--muted);
+  text-align:center;
+}
+
+.nav-info strong{
+  color:var(--navy);
+  display:block;
+  font-size:13px;
+}
+
+.btn{
+  padding:10px 26px;
+  border-radius:6px;
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer;
+  border:none;
+  transition:all .2s;
+  font-family:inherit;
+}
+
+.btn-back{
+  background:transparent;
+  border:1.5px solid var(--teal);
+  color:var(--teal);
+}
+
+.btn-back:hover{
+  background:var(--all-bg);
+}
+
+.btn-next{
+  background:var(--teal);
+  color:#fff;
+  box-shadow:0 2px 6px rgba(0,107,107,.3);
+}
+
+.btn-next:hover{
+  background:var(--teal-dark);
+}
+
+.btn-next:disabled{
+  background:#B8CCCC;
+  box-shadow:none;
+  cursor:not-allowed;
+}
+
+/* ERROR */
+
+.input-error{
+  border-color:#d93025 !important;
+}
+
+.error-message{
+  color:#d93025;
+  font-size:12px;
+  margin-top:5px;
+  display:none;
+}
+
+.error-message.show{
+  display:block;
+}
+
 /* DONE */
-#done-scr{display:none;text-align:center;padding:50px 20px}
-.sec-panel{display:none}
-.sec-panel.active{display:block}
-@media(max-width:600px){.g2,.g3{grid-template-columns:1fr}.sec-body{padding:18px 14px}}
+
+#done-scr{
+  display:none;
+  text-align:center;
+  padding:50px 20px;
+}
+
+.sec-panel{
+  display:none;
+}
+
+.sec-panel.active{
+  display:block;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:600px){
+
+  .g2,
+  .g3{
+    grid-template-columns:1fr;
+  }
+
+  .sec-body{
+    padding:18px 14px;
+  }
+
+  .hdr-tag{
+    display:none;
+  }
+
+  .hdr-ttl{
+    font-size:13px;
+  }
+
+  #nav-bar{
+    padding:10px 12px;
+  }
+
+  .btn{
+    padding:9px 14px;
+  }
+
+  .nav-info{
+    font-size:10px;
+  }
+
+  .nav-info strong{
+    font-size:11px;
+  }
+}
 </style>
 </head>
+
 <body>
 
+<!-- HEADER -->
+
 <div id="hdr">
- <div class="hdr-in">
- <div class="hdr-logo">🎓</div>
- <div>
- <div class="hdr-sub">Universidade Corporativa RioSaúde</div>
- <div class="hdr-ttl">Formulário de Planejamento de Ação Formativa</div>
- </div>
- <div class="hdr-tag">Protótipo · Google Forms</div>
- </div>
- <div id="prog-wrap">
- <div id="prog-bar"></div>
- <div id="prog-lbl"></div>
- </div>
+
+  <div class="hdr-in">
+
+    <div class="hdr-logo">🎓</div>
+
+    <div>
+      <div class="hdr-sub">
+        Universidade Corporativa RioSaúde
+      </div>
+
+      <div class="hdr-ttl">
+        Formulário de Planejamento de Ação Formativa
+      </div>
+    </div>
+
+    <div class="hdr-tag">
+      Formulário Digital
+    </div>
+
+  </div>
+
+  <div id="prog-wrap">
+    <div id="prog-bar"></div>
+    <div id="prog-lbl"></div>
+  </div>
+
 </div>
+
 
 <div id="main">
 
- <!-- FLOW MAP -->
- <div id="flow-map">
- <div class="flow-ttl">⚙ Fluxo de Seções — sua rota atual</div>
- <div id="flow-steps"></div>
- </div>
+<!-- FLOW MAP -->
 
- <!-- ═══ SEÇÃO 1 ═══ -->
- <div id="sec-S1" class="sec-panel active">
- <div class="sec-head">
- <div class="sec-num">01</div>
- <div>
- <div class="sec-ttl">Solicitação e Identificação</div>
- <div class="sec-sub">Reunião inicial com o setor demandante e abertura do processo</div>
- <span class="badge b-all">TODAS AS MODALIDADES</span>
- </div>
- </div>
- <div class="sec-body">
- <div class="g2">
- <div class="field"><div class="flabel">Setor / Área Demandante <span class="req">*</span></div><input type="text" placeholder="Ex.: Gerência de Enfermagem"></div>
- <div class="field"><div class="flabel">Data da Reunião Inicial <span class="req">*</span></div><input type="date"></div>
- </div>
- <div class="field"><div class="flabel">Responsável pelo Conteúdo — Setor Demandante <span class="req">*</span></div><input type="text" placeholder="Nome completo"></div>
- <div class="g2">
- <div class="field"><div class="flabel">E-mail do Responsável <span class="req">*</span></div><input type="email" placeholder="nome@riosaude.rio.br"></div>
- <div class="field"><div class="flabel">Telefone / Ramal</div><input type="text" placeholder="(21) 99999-9999 | Ramal 123"></div>
- </div>
- <div class="field">
- <div class="flabel">Estratégia de Execução Definida em Reunião <span class="req">*</span></div>
- <div class="fhelp">Resumo do alinhamento entre setor demandante e Área de Processos e Desenvolvimento/DGP.</div>
- <textarea placeholder="Ex.: Ação em formato de curso EAD com vídeos curtos por módulo, avaliação ao final e certificação automática…"></textarea>
- </div>
- <div class="field">
- <div class="flabel">Recursos Didáticos Definidos em Reunião</div>
- <div class="fhelp">Ex.: vídeos, infográficos, estudo de caso, quiz, leituras complementares…</div>
- <textarea placeholder="Liste os recursos acordados em reunião" rows="2"></textarea>
- </div>
- <div class="field"><div class="flabel">Data de Envio do E-mail de Solicitação para ead.riosaude@gmail.com <span class="req">*</span></div><input type="date"></div>
- <div class="field">
- <div class="flabel">Esta é uma situação de urgência? <span class="req">*</span></div>
- <div class="fhelp">Casos que exijam prazos de órgãos fiscalizadores ou diretorias da RioSaúde serão tratados individualmente.</div>
- <label class="ropt"><input type="radio" name="urgencia" value="sim" onchange="tog('urgencia-blk',true)"><div><div class="ropt-lbl">Sim</div></div></label>
- <label class="ropt"><input type="radio" name="urgencia" value="nao" onchange="tog('urgencia-blk',false)"><div><div class="ropt-lbl">Não</div></div></label>
- </div>
- <div id="urgencia-blk" class="cond-blk">
- <div class="field"><div class="flabel">Detalhamento da Urgência <span class="req">*</span></div><div class="fhelp">Descreva o órgão/diretoria, prazo e motivo.</div><textarea placeholder="Ex.: Prazo determinado pelo TCM para emissão de certificados até DD/MM/AAAA…"></textarea></div>
- </div>
+<div id="flow-map">
 
- <hr class="div">
- <div class="sub-ttl">Identificação da Ação Formativa</div>
+  <div class="flow-ttl">
+    ⚙ Fluxo de Seções — sua rota atual
+  </div>
 
- <div class="field"><div class="flabel">Título da Ação Formativa <span class="req">*</span></div><input type="text" placeholder="Ex.: Capacitação em Segurança do Trabalho"></div>
- <div class="field"><div class="flabel">Público-Alvo <span class="req">*</span></div><input type="text" placeholder="Ex.: Todos os profissionais que atuam na assistência"></div>
- <div class="g2">
- <div class="field">
- <div class="flabel">Modalidade Educacional <span class="req">*</span></div>
- <div class="fhelp">Microtreinamento | Palestra | Treinamento | Oficina | Curso | Workshop | Capacitação</div>
- <input type="text" placeholder="Ex.: Curso | Capacitação | Treinamento">
- </div>
- <div class="field"><div class="flabel">Duração Total <span class="req">*</span></div><input type="text" placeholder="Ex.: 4 horas | 1h30min"></div>
- </div>
- <div class="g2">
- <div class="field"><div class="flabel">Data Limite para Lançamento na Plataforma <span class="req">*</span></div><input type="date"></div>
- <div class="field"><div class="flabel">Validade do Certificado <span class="req">*</span></div><input type="text" placeholder="Ex.: 1 ano | Vitalício"></div>
- </div>
+  <div id="flow-steps"></div>
 
- <hr class="div">
+</div>
 
- <!-- QUESTÃO DE ROTEAMENTO PRINCIPAL -->
- <div class="field">
- <div class="flabel" style="font-size:15px;color:var(--navy)">★ TIPO DE AÇÃO FORMATIVA — Selecione para avançar <span class="req">*</span></div>
- <div class="fhelp">Este campo determina automaticamente para qual seção o formulário irá avançar.</div>
- <label class="ropt">
- <input type="radio" name="tipo_acao" value="sincrona" onchange="setTipo('sincrona')">
- <div><div class="ropt-lbl">🟡 Síncrona</div><div class="ropt-desc">Ação presencial ou ao vivo. Inscrição, avaliação e certificado na plataforma.</div></div>
- </label>
- <label class="ropt">
- <input type="radio" name="tipo_acao" value="assincrona" onchange="setTipo('assincrona')">
- <div><div class="ropt-lbl">🟢 Assíncrona</div><div class="ropt-desc">Ação totalmente autogerenciada na plataforma. Profissional acessa em qualquer momento.</div></div>
- </label>
- <label class="ropt">
- <input type="radio" name="tipo_acao" value="hibrida" onchange="setTipo('hibrida')">
- <div><div class="ropt-lbl">🔵 Híbrida</div><div class="ropt-desc">Combina encontro(s) síncrono(s) com conteúdo assíncrono na plataforma.</div></div>
- </label>
- <div id="tipo-rhint" class="rhint"></div>
- </div>
- </div>
- </div>
 
- <!-- ═══ SEÇÃO 2S — SÍNCRONA ═══ -->
- <div id="sec-S2S" class="sec-panel">
- <div class="sec-head">
- <div class="sec-num">02</div>
- <div>
- <div class="sec-ttl">Apresentação, Logística e Síntese do Conteúdo</div>
- <div class="sec-sub">Informações da ação síncrona exibidas na plataforma antes da avaliação</div>
- <span class="badge b-sync">SÍNCRONA</span>
- </div>
- </div>
- <div class="sec-body">
- <div class="ibox sync"><span class="ic">ℹ️</span><span>Para ações síncronas, a plataforma exibirá o <strong>título, apresentação e informações/materiais</strong> desta seção antes de direcionar o profissional para a avaliação.</span></div>
- <div class="field">
- <div class="flabel">Apresentação da Ação <span class="req">*</span></div>
- <div class="fhelp">Descreva a visão geral e objetivos. Contextualize o propósito institucional.</div>
- <textarea placeholder='Ex.: "Esta capacitação foi desenvolvida para profissionais que atuam em… Nosso objetivo é que você saia com compreensão clara sobre…"'></textarea>
- </div>
- <div class="field">
- <div class="flabel">Descrição para o Portal (visível ao colaborador ao acessar a ação) <span class="req">*</span></div>
- <div class="fhelp">Informe duração, prazo de conclusão e orientações gerais.</div>
- <textarea placeholder='Ex.: "Este treinamento tem duração de aproximadamente 3 horas e você terá 10 dias úteis para concluí-lo…"'></textarea>
- </div>
- <div class="field">
- <div class="flabel">Informações Importantes a Exibir na Plataforma (antes da avaliação)</div>
- <div class="fhelp">Ex.: pré-requisitos, orientações de segurança, avisos regulatórios, links de acesso…</div>
- <textarea placeholder="Liste as informações que devem aparecer na plataforma antes da avaliação"></textarea>
- </div>
- <div class="field">
- <div class="flabel">Materiais de Apoio a Disponibilizar (arquivos ou links)</div>
- <textarea rows="2" placeholder="Ex.: Manual X.pdf | Protocolo Y.pdf | Link do formulário Z"></textarea>
- </div>
- <hr class="div">
- <div class="sub-ttl">Informações Logísticas</div>
- <div class="g2">
- <div class="field"><div class="flabel">Data de Realização <span class="req">*</span></div><input type="date"></div>
- <div class="field"><div class="flabel">Horário <span class="req">*</span></div><input type="text" placeholder="09h00 às 12h00"></div>
- </div>
- <div class="g2">
- <div class="field"><div class="flabel">Local / Formato <span class="req">*</span></div><input type="text" placeholder="Auditório Central | Zoom | Presencial + transmissão"></div>
- <div class="field"><div class="flabel">Facilitador / Instrutor <span class="req">*</span></div><input type="text" placeholder="Nome completo e área"></div>
- </div>
- <div class="field"><div class="flabel">Nº de Vagas / Participantes Esperados</div><input type="number" placeholder="Ex.: 30" style="width:160px"></div>
- <hr class="div">
- <div class="sub-ttl">Síntese do Conteúdo Abordado</div>
- <div class="field">
- <div class="flabel">Síntese do Conteúdo por Tópico <span class="req">*</span></div>
- <div class="fhelp">Use o modelo:
+<!-- ========================================================= -->
+<!-- SEÇÃO 1 -->
+<!-- ========================================================= -->
+
+<div id="sec-S1" class="sec-panel active">
+
+  <div class="sec-head">
+
+    <div class="sec-num">01</div>
+
+    <div>
+
+      <div class="sec-ttl">
+        Solicitação e Identificação
+      </div>
+
+      <div class="sec-sub">
+        Reunião inicial com o setor demandante e abertura do processo
+      </div>
+
+      <span class="badge b-all">
+        TODAS AS MODALIDADES
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <div class="sec-body">
+
+    <div class="g2">
+
+      <div class="field">
+        <div class="flabel">
+          Setor / Área Demandante
+          <span class="req">*</span>
+        </div>
+
+        <input
+          type="text"
+          required
+          placeholder="Ex.: Gerência de Enfermagem">
+      </div>
+
+
+      <div class="field">
+        <div class="flabel">
+          Data da Reunião Inicial
+          <span class="req">*</span>
+        </div>
+
+        <input type="date" required>
+      </div>
+
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Responsável pelo Conteúdo — Setor Demandante
+        <span class="req">*</span>
+      </div>
+
+      <input
+        type="text"
+        required
+        placeholder="Nome completo">
+
+    </div>
+
+
+    <div class="g2">
+
+      <div class="field">
+
+        <div class="flabel">
+          E-mail do Responsável
+          <span class="req">*</span>
+        </div>
+
+        <input
+          type="email"
+          required
+          placeholder="nome@riosaude.rio.br">
+
+      </div>
+
+
+      <div class="field">
+
+        <div class="flabel">
+          Telefone / Ramal
+        </div>
+
+        <input
+          type="text"
+          placeholder="(21) 99999-9999 | Ramal 123">
+
+      </div>
+
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Estratégia de Execução Definida em Reunião
+        <span class="req">*</span>
+      </div>
+
+      <div class="fhelp">
+        Resumo do alinhamento entre setor demandante e Área de Processos e Desenvolvimento/DGP.
+      </div>
+
+      <textarea
+        required
+        placeholder="Ex.: Ação em formato de curso EAD com vídeos curtos por módulo, avaliação ao final e certificação automática…"></textarea>
+
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Recursos Didáticos Definidos em Reunião
+      </div>
+
+      <div class="fhelp">
+        Ex.: vídeos, infográficos, estudo de caso, quiz, leituras complementares…
+      </div>
+
+      <textarea
+        placeholder="Liste os recursos acordados em reunião"
+        rows="2"></textarea>
+
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Data de Envio do E-mail de Solicitação para ead.riosaude@gmail.com
+        <span class="req">*</span>
+      </div>
+
+      <input type="date" required>
+
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Esta é uma situação de urgência?
+        <span class="req">*</span>
+      </div>
+
+      <div class="fhelp">
+        Casos que exijam prazos de órgãos fiscalizadores ou diretorias da RioSaúde serão tratados individualmente.
+      </div>
+
+
+      <label class="ropt">
+
+        <input
+          type="radio"
+          name="urgencia"
+          value="sim"
+          onchange="tog('urgencia-blk',true)">
+
+        <div>
+          <div class="ropt-lbl">
+            Sim
+          </div>
+        </div>
+
+      </label>
+
+
+      <label class="ropt">
+
+        <input
+          type="radio"
+          name="urgencia"
+          value="nao"
+          onchange="tog('urgencia-blk',false)">
+
+        <div>
+          <div class="ropt-lbl">
+            Não
+          </div>
+        </div>
+
+      </label>
+
+    </div>
+
+
+    <div id="urgencia-blk" class="cond-blk">
+
+      <div class="field">
+
+        <div class="flabel">
+          Detalhamento da Urgência
+          <span class="req">*</span>
+        </div>
+
+        <div class="fhelp">
+          Descreva o órgão/diretoria, prazo e motivo.
+        </div>
+
+        <textarea
+          placeholder="Ex.: Prazo determinado pelo TCM para emissão de certificados até DD/MM/AAAA…"></textarea>
+
+      </div>
+
+    </div>
+
+
+    <hr class="div">
+
+
+    <div class="sub-ttl">
+      Identificação da Ação Formativa
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Título da Ação Formativa
+        <span class="req">*</span>
+      </div>
+
+      <input
+        type="text"
+        required
+        placeholder="Ex.: Capacitação em Segurança do Trabalho">
+
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Público-Alvo
+        <span class="req">*</span>
+      </div>
+
+      <input
+        type="text"
+        required
+        placeholder="Ex.: Todos os profissionais que atuam na assistência">
+
+    </div>
+
+
+    <div class="g2">
+
+      <div class="field">
+
+        <div class="flabel">
+          Modalidade Educacional
+          <span class="req">*</span>
+        </div>
+
+        <div class="fhelp">
+          Microtreinamento | Palestra | Treinamento | Oficina | Curso | Workshop | Capacitação
+        </div>
+
+        <input
+          type="text"
+          required
+          placeholder="Ex.: Curso | Capacitação | Treinamento">
+
+      </div>
+
+
+      <div class="field">
+
+        <div class="flabel">
+          Duração Total
+          <span class="req">*</span>
+        </div>
+
+        <input
+          type="text"
+          required
+          placeholder="Ex.: 4 horas | 1h30min">
+
+      </div>
+
+    </div>
+
+
+    <div class="g2">
+
+      <div class="field">
+
+        <div class="flabel">
+          Data Limite para Lançamento na Plataforma
+          <span class="req">*</span>
+        </div>
+
+        <input type="date" required>
+
+      </div>
+
+
+      <div class="field">
+
+        <div class="flabel">
+          Validade do Certificado
+          <span class="req">*</span>
+        </div>
+
+        <input
+          type="text"
+          required
+          placeholder="Ex.: 1 ano | Vitalício">
+
+      </div>
+
+    </div>
+
+
+    <hr class="div">
+
+
+    <!-- ROTEAMENTO -->
+
+    <div class="field">
+
+      <div
+        class="flabel"
+        style="font-size:15px;color:var(--navy)">
+
+        ★ TIPO DE AÇÃO FORMATIVA —
+        Selecione para avançar
+        <span class="req">*</span>
+
+      </div>
+
+
+      <div class="fhelp">
+        Este campo determina automaticamente para qual seção o formulário irá avançar.
+      </div>
+
+
+      <label class="ropt">
+
+        <input
+          type="radio"
+          name="tipo_acao"
+          value="sincrona"
+          onchange="setTipo('sincrona')">
+
+        <div>
+
+          <div class="ropt-lbl">
+            🟡 Síncrona
+          </div>
+
+          <div class="ropt-desc">
+            Ação presencial ou ao vivo. Inscrição, avaliação e certificado na plataforma.
+          </div>
+
+        </div>
+
+      </label>
+
+
+      <label class="ropt">
+
+        <input
+          type="radio"
+          name="tipo_acao"
+          value="assincrona"
+          onchange="setTipo('assincrona')">
+
+        <div>
+
+          <div class="ropt-lbl">
+            🟢 Assíncrona
+          </div>
+
+          <div class="ropt-desc">
+            Ação totalmente autogerenciada na plataforma. Profissional acessa em qualquer momento.
+          </div>
+
+        </div>
+
+      </label>
+
+
+      <label class="ropt">
+
+        <input
+          type="radio"
+          name="tipo_acao"
+          value="hibrida"
+          onchange="setTipo('hibrida')">
+
+        <div>
+
+          <div class="ropt-lbl">
+            🔵 Híbrida
+          </div>
+
+          <div class="ropt-desc">
+            Combina encontro(s) síncrono(s) com conteúdo assíncrono na plataforma.
+          </div>
+
+        </div>
+
+      </label>
+
+
+      <div
+        id="tipo-rhint"
+        class="rhint">
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ========================================================= -->
+<!-- SEÇÃO 2S -->
+<!-- ========================================================= -->
+
+<div id="sec-S2S" class="sec-panel">
+
+  <div class="sec-head">
+
+    <div class="sec-num">
+      02
+    </div>
+
+    <div>
+
+      <div class="sec-ttl">
+        Apresentação, Logística e Síntese do Conteúdo
+      </div>
+
+      <div class="sec-sub">
+        Informações da ação síncrona exibidas na plataforma antes da avaliação
+      </div>
+
+      <span class="badge b-sync">
+        SÍNCRONA
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <div class="sec-body">
+
+    <div class="ibox sync">
+
+      <span class="ic">ℹ️</span>
+
+      <span>
+        Para ações síncronas, a plataforma exibirá o
+        <strong>título, apresentação e informações/materiais</strong>
+        desta seção antes de direcionar o profissional para a avaliação.
+      </span>
+
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Apresentação da Ação
+        <span class="req">*</span>
+      </div>
+
+      <div class="fhelp">
+        Descreva a visão geral e objetivos. Contextualize o propósito institucional.
+      </div>
+
+      <textarea
+        required
+        placeholder='Ex.: "Esta capacitação foi desenvolvida para profissionais que atuam em… Nosso objetivo é que você saia com compreensão clara sobre…"'></textarea>
+
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Descrição para o Portal
+        <span class="req">*</span>
+      </div>
+
+      <div class="fhelp">
+        Informe duração, prazo de conclusão e orientações gerais.
+      </div>
+
+      <textarea
+        required
+        placeholder='Ex.: "Este treinamento tem duração de aproximadamente 3 horas e você terá 10 dias úteis para concluí-lo…"'></textarea>
+
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Informações Importantes a Exibir na Plataforma
+      </div>
+
+      <textarea
+        placeholder="Liste as informações que devem aparecer na plataforma antes da avaliação"></textarea>
+
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Materiais de Apoio a Disponibilizar
+      </div>
+
+      <textarea
+        rows="2"
+        placeholder="Ex.: Manual X.pdf | Protocolo Y.pdf | Link do formulário Z"></textarea>
+
+    </div>
+
+
+    <hr class="div">
+
+
+    <div class="sub-ttl">
+      Informações Logísticas
+    </div>
+
+
+    <div class="g2">
+
+      <div class="field">
+
+        <div class="flabel">
+          Data de Realização
+          <span class="req">*</span>
+        </div>
+
+        <input type="date" required>
+
+      </div>
+
+
+      <div class="field">
+
+        <div class="flabel">
+          Horário
+          <span class="req">*</span>
+        </div>
+
+        <input
+          type="text"
+          required
+          placeholder="09h00 às 12h00">
+
+      </div>
+
+    </div>
+
+
+    <div class="g2">
+
+      <div class="field">
+
+        <div class="flabel">
+          Local / Formato
+          <span class="req">*</span>
+        </div>
+
+        <input
+          type="text"
+          required
+          placeholder="Auditório Central | Zoom | Presencial + transmissão">
+
+      </div>
+
+
+      <div class="field">
+
+        <div class="flabel">
+          Facilitador / Instrutor
+          <span class="req">*</span>
+        </div>
+
+        <input
+          type="text"
+          required
+          placeholder="Nome completo e área">
+
+      </div>
+
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Nº de Vagas / Participantes Esperados
+      </div>
+
+      <input
+        type="number"
+        min="1"
+        placeholder="Ex.: 30"
+        style="width:160px">
+
+    </div>
+
+
+    <hr class="div">
+
+
+    <div class="sub-ttl">
+      Síntese do Conteúdo Abordado
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Síntese do Conteúdo por Tópico
+        <span class="req">*</span>
+      </div>
+
+      <div class="fhelp">Use o modelo:
 Tópico 1 — [nome]: [síntese em 1-2 frases]
 Tópico 2 — [nome]: [síntese em 1-2 frases]
 
 Este conteúdo ficará na plataforma para contextualizar o profissional antes da avaliação.</div>
- <textarea rows="6" placeholder="Tópico 1 — Introdução: Breve contextualização histórica e relevância para a prática atual…&#10;Tópico 2 — Procedimentos: Detalhamento dos protocolos institucionais…"></textarea>
- </div>
- <div class="field">
- <div class="flabel">Há apoio/participação da NUCOM confirmado? <span class="req">*</span></div>
- <label class="ropt"><input type="radio" name="nucom_s" value="sim"><div class="ropt-lbl">Sim</div></label>
- <label class="ropt"><input type="radio" name="nucom_s" value="nao"><div class="ropt-lbl">Não</div></label>
- </div>
- <hr class="div">
- <!-- QUESTÃO DE ROTEAMENTO 2 -->
- <div class="field">
- <div class="flabel" style="font-size:15px;color:var(--navy)">★ A área demandante deseja GRAVAR / REGISTRAR a ação síncrona? <span class="req">*</span></div>
- <div class="fhelp">A gravação não é obrigatória. Caso opte por registrar, a NUCOM precisará ser acionada com antecedência para garantir presença no dia.</div>
- <label class="ropt">
- <input type="radio" name="gravar" value="sim" onchange="setGravar('sim')">
- <div><div class="ropt-lbl">🎬 Sim — desejo gravar a ação síncrona</div><div class="ropt-desc">Será necessário alinhar a gravação com a NUCOM no dia do curso.</div></div>
- </label>
- <label class="ropt">
- <input type="radio" name="gravar" value="nao" onchange="setGravar('nao')">
- <div><div class="ropt-lbl">Não — a ação não será gravada</div></div>
- </label>
- <div id="gravar-rhint" class="rhint"></div>
- </div>
- </div>
- </div>
 
- <!-- ═══ SEÇÃO 2SG — GRAVAÇÃO ═══ -->
- <div id="sec-S2SG" class="sec-panel">
- <div class="sec-head">
- <div class="sec-num">02+</div>
- <div>
- <div class="sec-ttl">Gravação da Ação Síncrona</div>
- <div class="sec-sub">Alinhamento com a NUCOM para registro da ação</div>
- <span class="badge b-cond">CONDICIONAL — apenas se houver gravação</span>
- </div>
- </div>
- <div class="sec-body">
- <div class="ibox cond"><span class="ic">🎬</span><span>Esta seção aparece apenas quando a área opta por gravar a ação síncrona. Ao final, o formulário avança automaticamente para a <strong>Seção 3 — Avaliação</strong>.</span></div>
- <div class="field"><div class="flabel">Data da Ação (para alinhamento com NUCOM) <span class="req">*</span></div><div class="fhelp">A NUCOM será contatada para confirmar disponibilidade na data informada.</div><input type="date"></div>
- <div class="g2">
- <div class="field"><div class="flabel">Horário de Início e Término <span class="req">*</span></div><input type="text" placeholder="09h00 às 12h00"></div>
- <div class="field"><div class="flabel">Local / Formato da Gravação <span class="req">*</span></div><input type="text" placeholder="Auditório | Zoom | Teams"></div>
- </div>
- <div class="field">
- <div class="flabel">Observações para a Gravação</div>
- <div class="fhelp">Número de apresentadores, materiais de apoio, necessidade de edição, entregas esperadas…</div>
- <textarea placeholder="Descreva as necessidades específicas da gravação"></textarea>
- </div>
- </div>
- </div>
+      <textarea
+        required
+        rows="6"
+        placeholder="Tópico 1 — Introdução: Breve contextualização histórica e relevância para a prática atual…
+Tópico 2 — Procedimentos: Detalhamento dos protocolos institucionais…"></textarea>
 
- <!-- ═══ SEÇÃO 2A — ASSÍNCRONA ═══ -->
- <div id="sec-S2A" class="sec-panel">
- <div class="sec-head">
- <div class="sec-num">02</div>
- <div>
- <div class="sec-ttl">Apresentação, Estrutura de Conteúdo e Produção</div>
- <div class="sec-sub">Módulos, conteúdos e produção com a NUCOM</div>
- <span class="badge b-async">ASSÍNCRONA</span>
- </div>
- </div>
- <div class="sec-body">
- <div class="field"><div class="flabel">Apresentação da Ação <span class="req">*</span></div><textarea placeholder='Ex.: "Esta capacitação foi desenvolvida para profissionais que…"'></textarea></div>
- <div class="field"><div class="flabel">Descrição para o Portal <span class="req">*</span></div><textarea placeholder='Ex.: "Este treinamento tem duração de aproximadamente 3 horas e você terá 10 dias úteis para concluí-lo…"'></textarea></div>
- <hr class="div">
- <div class="sub-ttl">Estrutura de Módulos e Conteúdos</div>
- <div class="field">
- <div class="flabel">Estrutura de Módulos e Conteúdos <span class="req">*</span></div>
- <div class="fhelp">Módulo 1 — [Título]:
- Conteúdo 1: [nome]
- Conteúdo 2: [nome]
-Módulo 2 — [Título]:
- Conteúdo 1: [nome] ...</div>
- <textarea rows="8" placeholder="Módulo 1 — Fundamentos:&#10; Conteúdo 1: Introdução ao tema&#10; Conteúdo 2: Conceitos essenciais&#10;Módulo 2 — Procedimentos:&#10; Conteúdo 1: Protocolo institucional"></textarea>
- </div>
- <div class="field">
- <div class="flabel">Texto de Fechamento de Cada Vídeo (caso haja)</div>
- <div class="fhelp">Ex.: Módulo 1 / Conteúdo 1: "Compreender os fundamentos é o primeiro passo para…"</div>
- <textarea placeholder="Módulo 1 / Conteúdo 1: [texto de fechamento]&#10;Módulo 1 / Conteúdo 2: [texto de fechamento]" rows="3"></textarea>
- </div>
- <hr class="div">
- <div class="sub-ttl">Produção com NUCOM</div>
- <div class="field">
- <div class="flabel">Há vídeos a produzir junto à NUCOM? <span class="req">*</span></div>
- <div class="fhelp">Se SIM: roteiro avaliado pela Área de Processos e Desenvolvimento antes de encaminhar. Até 1h total = 15 dias úteis. Acima de 1h = prazo a definir.</div>
- <label class="ropt"><input type="radio" name="videos_a" value="sim" onchange="tog('videos-a-blk',true)"><div class="ropt-lbl">Sim</div></label>
- <label class="ropt"><input type="radio" name="videos_a" value="nao" onchange="tog('videos-a-blk',false)"><div class="ropt-lbl">Não</div></label>
- </div>
- <div id="videos-a-blk" class="cond-blk">
- <div class="field"><div class="flabel">Roteiro das Gravações <span class="req">*</span></div><div class="fhelp">Descreva o roteiro de cada vídeo indicando o módulo/conteúdo correspondente.</div><textarea rows="5" placeholder="Vídeo 1 — Módulo 1 / Conteúdo 1:&#10;[roteiro completo]"></textarea></div>
- <div class="g2">
- <div class="field"><div class="flabel">Duração Total Estimada</div><input type="text" placeholder="Ex.: 45 min | 3 vídeos de 15 min"></div>
- <div class="field"><div class="flabel">Data Prevista de Envio do Roteiro à NUCOM</div><input type="date"></div>
- </div>
- </div>
- <div class="field"><div class="flabel">Materiais Complementares à NUCOM</div><div class="fhelp">Imagens, tabelas, esquemas, capa da ação. Registrar na planilha de acompanhamento no Drive.</div><textarea rows="2" placeholder="Ex.: Logo em alta resolução, esquema do fluxo de atendimento…"></textarea></div>
- <div class="field"><div class="flabel">Cronograma com a NUCOM (uso interno)</div><textarea rows="2" placeholder="Ex.: Roteiro entregue: DD/MM | Gravação: DD/MM | Entrega final: DD/MM"></textarea></div>
- </div>
- </div>
+    </div>
 
- <!-- ═══ SEÇÃO 2H — HÍBRIDA ═══ -->
- <div id="sec-S2H" class="sec-panel">
- <div class="sec-head">
- <div class="sec-num">02</div>
- <div>
- <div class="sec-ttl">Apresentação, Logística, Estrutura e Produção</div>
- <div class="sec-sub">Combina encontro síncrono com conteúdo assíncrono na plataforma</div>
- <span class="badge b-async">HÍBRIDA</span>
- </div>
- </div>
- <div class="sec-body">
- <div class="ibox async"><span class="ic">🔵</span><span>A ação híbrida combina <strong>encontro(s) síncrono(s)</strong> (presencial ou ao vivo) com <strong>conteúdo assíncrono</strong> disponível na plataforma. Preencha os dois componentes.</span></div>
- <div class="field"><div class="flabel">Apresentação da Ação <span class="req">*</span></div><textarea placeholder="Descreva visão geral e objetivos da ação híbrida…"></textarea></div>
- <div class="field"><div class="flabel">Descrição para o Portal <span class="req">*</span></div><textarea placeholder='Ex.: "Esta capacitação combina um encontro presencial com conteúdo disponível na plataforma…"'></textarea></div>
- <div class="field"><div class="flabel">Informações sobre o Encontro Síncrono (para exibir na plataforma)</div><div class="fhelp">Data, horário, link, pré-requisitos, documentos necessários para o encontro…</div><textarea placeholder="Ex.: O encontro presencial acontecerá no dia DD/MM às 09h00 no Auditório Central…"></textarea></div>
- <div class="field"><div class="flabel">Materiais de Apoio a Disponibilizar na Plataforma</div><textarea rows="2" placeholder="Protocolo X.pdf | Link do formulário Y"></textarea></div>
- <hr class="div">
- <div class="sub-ttl">📅 Encontro Síncrono</div>
- <div class="g2">
- <div class="field"><div class="flabel">Data do Encontro <span class="req">*</span></div><input type="date"></div>
- <div class="field"><div class="flabel">Horário <span class="req">*</span></div><input type="text" placeholder="09h00 às 12h00"></div>
- </div>
- <div class="g2">
- <div class="field"><div class="flabel">Local / Formato <span class="req">*</span></div><input type="text" placeholder="Auditório | Zoom | Teams"></div>
- <div class="field"><div class="flabel">Facilitador / Instrutor <span class="req">*</span></div><input type="text" placeholder="Nome completo e área"></div>
- </div>
- <hr class="div">
- <div class="sub-ttl">📚 Conteúdo Assíncrono na Plataforma</div>
- <div class="field">
- <div class="flabel">Estrutura de Módulos e Conteúdos <span class="req">*</span></div>
- <div class="fhelp">Módulo 1 — [Título]:
- Conteúdo 1: [nome]
-Módulo 2 — [Título]:
- Conteúdo 1: [nome]</div>
- <textarea rows="6" placeholder="Módulo 1 — [Título]:&#10; Conteúdo 1: [nome]&#10; Conteúdo 2: [nome]&#10;Módulo 2 — [Título]:&#10; Conteúdo 1: [nome]"></textarea>
- </div>
- <div class="field">
- <div class="flabel">Há vídeos a produzir junto à NUCOM? <span class="req">*</span></div>
- <label class="ropt"><input type="radio" name="videos_h" value="sim" onchange="tog('videos-h-blk',true)"><div class="ropt-lbl">Sim</div></label>
- <label class="ropt"><input type="radio" name="videos_h" value="nao" onchange="tog('videos-h-blk',false)"><div class="ropt-lbl">Não</div></label>
- </div>
- <div id="videos-h-blk" class="cond-blk">
- <div class="field"><div class="flabel">Roteiro das Gravações <span class="req">*</span></div><textarea rows="4" placeholder="Vídeo 1 — Módulo 1: [roteiro]"></textarea></div>
- </div>
- <div class="field"><div class="flabel">Materiais Complementares à NUCOM</div><textarea rows="2" placeholder="Imagens, tabelas, esquemas, capa da ação…"></textarea></div>
- <div class="field"><div class="flabel">Cronograma com a NUCOM (uso interno)</div><textarea rows="2" placeholder="Datas previstas para cada etapa de produção"></textarea></div>
- </div>
- </div>
 
- <!-- ═══ SEÇÃO 3 — AVALIAÇÃO ═══ -->
- <div id="sec-S3" class="sec-panel">
- <div class="sec-head">
- <div class="sec-num">03</div>
- <div>
- <div class="sec-ttl">Avaliação</div>
- <div class="sec-sub">Configuração e questões da avaliação da ação formativa</div>
- <span class="badge b-all">TODAS AS MODALIDADES</span>
- </div>
- </div>
- <div class="sec-body">
- <div class="field">
- <div class="flabel" style="font-size:15px;color:var(--navy)">★ Tipo de Questão da Avaliação <span class="req">*</span></div>
- <div class="fhelp">A escolha define o modelo de preenchimento das questões abaixo.</div>
- <label class="ropt"><input type="radio" name="tipo_q" value="mc" onchange="setTipoQ('mc')"><div><div class="ropt-lbl">Múltipla Escolha</div><div class="ropt-desc">4 alternativas (A, B, C, D); apenas uma correta.</div></div></label>
- <label class="ropt"><input type="radio" name="tipo_q" value="vf" onchange="setTipoQ('vf')"><div><div class="ropt-lbl">Verdadeiro ou Falso</div><div class="ropt-desc">Afirmação a ser julgada como Verdadeira ou Falsa.</div></div></label>
- <label class="ropt"><input type="radio" name="tipo_q" value="ambos" onchange="setTipoQ('ambos')"><div><div class="ropt-lbl">Ambos</div><div class="ropt-desc">A avaliação misturará múltipla escolha e verdadeiro ou falso. Indique o tipo em cada questão.</div></div></label>
- </div>
- <hr class="div">
- <div class="g3">
- <div class="field"><div class="flabel">Nº de Questões <span class="req">*</span></div><div class="fhelp">Mín. 6 | Máx. 10</div><input type="number" min="6" max="10" placeholder="Ex.: 8"></div>
- <div class="field"><div class="flabel">% Mínimo para Aprovação <span class="req">*</span></div><input type="number" min="0" max="100" placeholder="Ex.: 70"></div>
- <div class="field"><div class="flabel">Nº de Tentativas <span class="req">*</span></div><input type="number" min="1" placeholder="Ex.: 3"></div>
- </div>
- <hr class="div">
- <div id="q-instrucao" style="font-size:13px;color:var(--muted);margin-bottom:14px;padding:10px 13px;background:#F5F7F9;border-radius:6px;line-height:1.6">
- ☝️ Selecione o tipo de questão acima para ver o modelo de preenchimento.
- </div>
- <div id="q-container"></div>
- </div>
- </div>
+    <div class="field">
 
- <!-- ═══ SEÇÃO 4 — CERTIFICADO ═══ -->
- <div id="sec-S4" class="sec-panel">
- <div class="sec-head">
- <div class="sec-num">04</div>
- <div>
- <div class="sec-ttl">Certificado</div>
- <div class="sec-sub">Assinaturas obrigatória e opcional para emissão do certificado</div>
- <span class="badge b-all">TODAS AS MODALIDADES</span>
- </div>
- </div>
- <div class="sec-body">
- <div class="ibox info"><span class="ic">📄</span><span>A rubrica deve ser digitalizada em <strong>papel branco, somente a assinatura</strong>, sem moldura ou fundo. Nomear: <code>rubrica_assinatura1.jpg</code></span></div>
- <div class="sig-blk">
- <div class="sig-blk-ttl">✍️ Assinatura 1 — Direção (Obrigatório)</div>
- <div class="g2">
- <div class="field"><div class="flabel">Nome Completo <span class="req">*</span></div><input type="text" placeholder="Nome completo da autoridade signatária"></div>
- <div class="field"><div class="flabel">Cargo <span class="req">*</span></div><input type="text" placeholder="Ex.: Diretora de Gestão de Pessoas"></div>
- </div>
- <div class="upload-ph">📎 <strong>Upload da Rubrica (obrigatório):</strong> arquivo .jpg, papel branco, somente a assinatura.<br>Nomear: <code>rubrica_assinatura1.jpg</code><br><em style="font-size:11px;color:#AAA">(Campo de upload disponível no Google Forms — exige conta Google/@riosaude)</em></div>
- </div>
- <div class="sig-blk">
- <div class="sig-blk-ttl">✍️ Assinatura 2 — Segundo Responsável (Opcional)</div>
- <div class="g2">
- <div class="field"><div class="flabel">Nome Completo</div><input type="text" placeholder="Nome completo (se aplicável)"></div>
- <div class="field"><div class="flabel">Cargo</div><input type="text" placeholder="Cargo do segundo responsável"></div>
- </div>
- <div class="upload-ph">📎 <strong>Upload da Rubrica (opcional):</strong> Nomear: <code>rubrica_assinatura2.jpg</code></div>
- </div>
- </div>
- </div>
+      <div class="flabel">
+        Há apoio/participação da NUCOM confirmado?
+        <span class="req">*</span>
+      </div>
 
- <!-- ═══ SEÇÃO 5 — VALIDAÇÃO ═══ -->
- <div id="sec-S5" class="sec-panel">
- <div class="sec-head">
- <div class="sec-num">05</div>
- <div>
- <div class="sec-ttl">Validação e Publicação</div>
- <div class="sec-sub">Inserção na plataforma, validação cruzada e publicação da ação</div>
- <span class="badge b-all">TODAS AS MODALIDADES</span>
- </div>
- </div>
- <div class="sec-body">
- <div class="ibox tip"><span class="ic">🔧</span><span>Esta seção é de uso interno — preenchida pela Área de Processos e Desenvolvimento em conjunto com o setor demandante ao final do processo.</span></div>
- <div class="g2">
- <div class="field"><div class="flabel">Data Prevista para Inserção e Criação na Plataforma</div><input type="date"></div>
- <div class="field"><div class="flabel">Data Prevista para Validação Cruzada (Processos e Desenvolvimento / NUCOM)</div><input type="date"></div>
- </div>
- <div class="field">
- <div class="flabel">Houve necessidade de ajuste após a validação cruzada?</div>
- <div class="fhelp">Se SIM, o material retorna para nova rodada de validação antes da validação final.</div>
- <label class="ropt"><input type="radio" name="ajuste" value="sim"><div class="ropt-lbl">Sim — material retorna para nova validação</div></label>
- <label class="ropt"><input type="radio" name="ajuste" value="nao"><div class="ropt-lbl">Não</div></label>
- </div>
- <div class="g2">
- <div class="field"><div class="flabel">Data da Validação Final</div><input type="date"></div>
- <div class="field"><div class="flabel">Data Prevista de Publicação na Plataforma</div><input type="date"></div>
- </div>
- <div class="field"><div class="flabel">Observações Finais</div><div class="fhelp">Registre informações relevantes sobre o processo de validação e publicação.</div><textarea placeholder="Ex.: Versão revisada encaminhada após retorno do TCM em DD/MM…"></textarea></div>
- <hr class="div">
- <div class="g2" style="gap:18px">
- <div style="text-align:center;padding:18px;border:1px solid #E0E0E0;border-radius:8px">
- <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:18px">Assinatura do Responsável do Setor</div>
- <div style="border-bottom:1px solid #333;width:75%;margin:0 auto 10px"></div>
- <div class="field" style="text-align:left;margin-bottom:6px"><input type="text" placeholder="Nome"></div>
- <div class="field" style="margin-bottom:0"><input type="date"></div>
- </div>
- <div style="text-align:center;padding:18px;border:1px solid #E0E0E0;border-radius:8px">
- <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:18px">Validação — Educação Corporativa / DGP</div>
- <div style="border-bottom:1px solid #333;width:75%;margin:0 auto 10px"></div>
- <div class="field" style="text-align:left;margin-bottom:6px"><input type="text" placeholder="Nome"></div>
- <div class="field" style="margin-bottom:0"><input type="date"></div>
- </div>
- </div>
- </div>
- </div>
 
- <!-- DONE -->
- <div id="done-scr">
- <div class="sec-body" style="border-radius:10px;text-align:center;padding:48px">
- <div style="font-size:60px;margin-bottom:14px">✅</div>
- <div style="font-size:22px;font-weight:700;color:var(--navy);margin-bottom:8px">Formulário enviado com sucesso!</div>
- <div style="font-size:14px;color:var(--muted);margin-bottom:6px">Em até <strong>24 horas úteis</strong> você receberá o retorno da Área de Processos e Desenvolvimento/DGP sobre os próximos passos.</div>
- <div style="font-size:12px;color:#AAA;margin-bottom:28px">Universidade Corporativa RioSaúde · ead.riosaude@gmail.com</div>
- <button class="btn btn-next" onclick="resetForm()">+ Novo Preenchimento</button>
- </div>
- </div>
+      <label class="ropt">
 
-</div><!-- #main -->
+        <input
+          type="radio"
+          name="nucom_s"
+          value="sim">
 
-<!-- NAV BAR -->
-<div id="nav-bar">
- <button id="btn-back" class="btn btn-back" onclick="goBack()" style="visibility:hidden">← Voltar</button>
- <div class="nav-info" id="nav-info"><strong>Seção 01 — Solicitação e Identificação</strong><span>TODAS AS MODALIDADES</span></div>
- <button id="btn-next" class="btn btn-next" onclick="goNext()">Avançar →</button>
+        <div class="ropt-lbl">
+          Sim
+        </div>
+
+      </label>
+
+
+      <label class="ropt">
+
+        <input
+          type="radio"
+          name="nucom_s"
+          value="nao">
+
+        <div class="ropt-lbl">
+          Não
+        </div>
+
+      </label>
+
+    </div>
+
+
+    <hr class="div">
+
+
+    <!-- ROTEAMENTO 2 -->
+
+    <div class="field">
+
+      <div
+        class="flabel"
+        style="font-size:15px;color:var(--navy)">
+
+        ★ A área demandante deseja GRAVAR / REGISTRAR a ação síncrona?
+        <span class="req">*</span>
+
+      </div>
+
+
+      <div class="fhelp">
+        A gravação não é obrigatória. Caso opte por registrar, a NUCOM precisará ser acionada com antecedência para garantir presença no dia.
+      </div>
+
+
+      <label class="ropt">
+
+        <input
+          type="radio"
+          name="gravar"
+          value="sim"
+          onchange="setGravar('sim')">
+
+        <div>
+
+          <div class="ropt-lbl">
+            🎬 Sim — desejo gravar a ação síncrona
+          </div>
+
+          <div class="ropt-desc">
+            Será necessário alinhar a gravação com a NUCOM no dia do curso.
+          </div>
+
+        </div>
+
+      </label>
+
+
+      <label class="ropt">
+
+        <input
+          type="radio"
+          name="gravar"
+          value="nao"
+          onchange="setGravar('nao')">
+
+        <div>
+
+          <div class="ropt-lbl">
+            Não — a ação não será gravada
+          </div>
+
+        </div>
+
+      </label>
+
+
+      <div
+        id="gravar-rhint"
+        class="rhint">
+      </div>
+
+    </div>
+
+  </div>
+
 </div>
 
+
+<!-- ========================================================= -->
+<!-- SEÇÃO 2SG -->
+<!-- ========================================================= -->
+
+<div id="sec-S2SG" class="sec-panel">
+
+  <div class="sec-head">
+
+    <div class="sec-num">
+      02+
+    </div>
+
+    <div>
+
+      <div class="sec-ttl">
+        Gravação da Ação Síncrona
+      </div>
+
+      <div class="sec-sub">
+        Alinhamento com a NUCOM para registro da ação
+      </div>
+
+      <span class="badge b-cond">
+        CONDICIONAL
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <div class="sec-body">
+
+    <div class="ibox cond">
+
+      <span class="ic">
+        🎬
+      </span>
+
+      <span>
+        Esta seção aparece apenas quando a área opta por gravar a ação síncrona.
+        Ao final, o formulário avança automaticamente para a
+        <strong>Seção 3 — Avaliação</strong>.
+      </span>
+
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Data da Ação (para alinhamento com NUCOM)
+        <span class="req">*</span>
+      </div>
+
+      <div class="fhelp">
+        A NUCOM será contatada para confirmar disponibilidade na data informada.
+      </div>
+
+      <input type="date" required>
+
+    </div>
+
+
+    <div class="g2">
+
+      <div class="field">
+
+        <div class="flabel">
+          Horário de Início e Término
+          <span class="req">*</span>
+        </div>
+
+        <input
+          type="text"
+          required
+          placeholder="09h00 às 12h00">
+
+      </div>
+
+
+      <div class="field">
+
+        <div class="flabel">
+          Local / Formato da Gravação
+          <span class="req">*</span>
+        </div>
+
+        <input
+          type="text"
+          required
+          placeholder="Auditório | Zoom | Teams">
+
+      </div>
+
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Observações para a Gravação
+      </div>
+
+      <div class="fhelp">
+        Número de apresentadores, materiais de apoio, necessidade de edição, entregas esperadas…
+      </div>
+
+      <textarea
+        placeholder="Descreva as necessidades específicas da gravação"></textarea>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ========================================================= -->
+<!-- SEÇÃO 2A -->
+<!-- ========================================================= -->
+
+<div id="sec-S2A" class="sec-panel">
+
+  <div class="sec-head">
+
+    <div class="sec-num">
+      02
+    </div>
+
+    <div>
+
+      <div class="sec-ttl">
+        Apresentação, Estrutura de Conteúdo e Produção
+      </div>
+
+      <div class="sec-sub">
+        Módulos, conteúdos e produção com a NUCOM
+      </div>
+
+      <span class="badge b-async">
+        ASSÍNCRONA
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <div class="sec-body">
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Apresentação da Ação
+        <span class="req">*</span>
+      </div>
+
+      <textarea
+        required
+        placeholder='Ex.: "Esta capacitação foi desenvolvida para profissionais que…"'></textarea>
+
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Descrição para o Portal
+        <span class="req">*</span>
+      </div>
+
+      <textarea
+        required
+        placeholder='Ex.: "Este treinamento tem duração de aproximadamente 3 horas e você terá 10 dias úteis para concluí-lo…"'></textarea>
+
+    </div>
+
+
+    <hr class="div">
+
+
+    <div class="sub-ttl">
+      Estrutura de Módulos e Conteúdos
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Estrutura de Módulos e Conteúdos
+        <span class="req">*</span>
+      </div>
+
+      <div class="fhelp">Módulo 1 — [Título]:
+Conteúdo 1: [nome]
+Conteúdo 2: [nome]
+
+Módulo 2 — [Título]:
+Conteúdo 1: [nome] ...</div>
+
+      <textarea
+        required
+        rows="8"
+        placeholder="Módulo 1 — Fundamentos:
+Conteúdo 1: Introdução ao tema
+Conteúdo 2: Conceitos essenciais
+
+Módulo 2 — Procedimentos:
+Conteúdo 1: Protocolo institucional"></textarea>
+
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Texto de Fechamento de Cada Vídeo
+      </div>
+
+      <div class="fhelp">
+        Ex.: Módulo 1 / Conteúdo 1: "Compreender os fundamentos é o primeiro passo para…"
+      </div>
+
+      <textarea
+        rows="3"
+        placeholder="Módulo 1 / Conteúdo 1: [texto de fechamento]
+Módulo 1 / Conteúdo 2: [texto de fechamento]"></textarea>
+
+    </div>
+
+
+    <hr class="div">
+
+
+    <div class="sub-ttl">
+      Produção com NUCOM
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Há vídeos a produzir junto à NUCOM?
+        <span class="req">*</span>
+      </div>
+
+      <div class="fhelp">
+        Se SIM: roteiro avaliado pela Área de Processos e Desenvolvimento antes de encaminhar.
+        Até 1h total = 15 dias úteis. Acima de 1h = prazo a definir.
+      </div>
+
+
+      <label class="ropt">
+
+        <input
+          type="radio"
+          name="videos_a"
+          value="sim"
+          onchange="tog('videos-a-blk',true)">
+
+        <div class="ropt-lbl">
+          Sim
+        </div>
+
+      </label>
+
+
+      <label class="ropt">
+
+        <input
+          type="radio"
+          name="videos_a"
+          value="nao"
+          onchange="tog('videos-a-blk',false)">
+
+        <div class="ropt-lbl">
+          Não
+        </div>
+
+      </label>
+
+    </div>
+
+
+    <div
+      id="videos-a-blk"
+      class="cond-blk">
+
+      <div class="field">
+
+        <div class="flabel">
+          Roteiro das Gravações
+          <span class="req">*</span>
+        </div>
+
+        <textarea
+          rows="5"
+          placeholder="Vídeo 1 — Módulo 1 / Conteúdo 1:
+[roteiro completo]"></textarea>
+
+      </div>
+
+
+      <div class="g2">
+
+        <div class="field">
+
+          <div class="flabel">
+            Duração Total Estimada
+          </div>
+
+          <input
+            type="text"
+            placeholder="Ex.: 45 min | 3 vídeos de 15 min">
+
+        </div>
+
+
+        <div class="field">
+
+          <div class="flabel">
+            Data Prevista de Envio do Roteiro à NUCOM
+          </div>
+
+          <input type="date">
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Materiais Complementares à NUCOM
+      </div>
+
+      <div class="fhelp">
+        Imagens, tabelas, esquemas, capa da ação.
+      </div>
+
+      <textarea
+        rows="2"
+        placeholder="Ex.: Logo em alta resolução, esquema do fluxo de atendimento…"></textarea>
+
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Cronograma com a NUCOM
+      </div>
+
+      <textarea
+        rows="2"
+        placeholder="Ex.: Roteiro entregue: DD/MM | Gravação: DD/MM | Entrega final: DD/MM"></textarea>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ========================================================= -->
+<!-- SEÇÃO 2H -->
+<!-- ========================================================= -->
+
+<div id="sec-S2H" class="sec-panel">
+
+  <div class="sec-head">
+
+    <div class="sec-num">
+      02
+    </div>
+
+    <div>
+
+      <div class="sec-ttl">
+        Apresentação, Logística, Estrutura e Produção
+      </div>
+
+      <div class="sec-sub">
+        Combina encontro síncrono com conteúdo assíncrono na plataforma
+      </div>
+
+      <span class="badge b-async">
+        HÍBRIDA
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <div class="sec-body">
+
+
+    <div class="ibox async">
+
+      <span class="ic">
+        🔵
+      </span>
+
+      <span>
+        A ação híbrida combina
+        <strong>encontro(s) síncrono(s)</strong>
+        (presencial ou ao vivo) com
+        <strong>conteúdo assíncrono</strong>
+        disponível na plataforma.
+        Preencha os dois componentes.
+      </span>
+
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Apresentação da Ação
+        <span class="req">*</span>
+      </div>
+
+      <textarea
+        required
+        placeholder="Descreva visão geral e objetivos da ação híbrida…"></textarea>
+
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Descrição para o Portal
+        <span class="req">*</span>
+      </div>
+
+      <textarea
+        required
+        placeholder='Ex.: "Esta capacitação combina um encontro presencial com conteúdo disponível na plataforma…"'></textarea>
+
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Informações sobre o Encontro Síncrono
+      </div>
+
+      <div class="fhelp">
+        Data, horário, link, pré-requisitos, documentos necessários para o encontro…
+      </div>
+
+      <textarea
+        placeholder="Ex.: O encontro presencial acontecerá no dia DD/MM às 09h00 no Auditório Central…"></textarea>
+
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Materiais de Apoio a Disponibilizar na Plataforma
+      </div>
+
+      <textarea
+        rows="2"
+        placeholder="Protocolo X.pdf | Link do formulário Y"></textarea>
+
+    </div>
+
+
+    <hr class="div">
+
+
+    <div class="sub-ttl">
+      📅 Encontro Síncrono
+    </div>
+
+
+    <div class="g2">
+
+      <div class="field">
+
+        <div class="flabel">
+          Data do Encontro
+          <span class="req">*</span>
+        </div>
+
+        <input type="date" required>
+
+      </div>
+
+
+      <div class="field">
+
+        <div class="flabel">
+          Horário
+          <span class="req">*</span>
+        </div>
+
+        <input
+          type="text"
+          required
+          placeholder="09h00 às 12h00">
+
+      </div>
+
+    </div>
+
+
+    <div class="g2">
+
+      <div class="field">
+
+        <div class="flabel">
+          Local / Formato
+          <span class="req">*</span>
+        </div>
+
+        <input
+          type="text"
+          required
+          placeholder="Auditório | Zoom | Teams">
+
+      </div>
+
+
+      <div class="field">
+
+        <div class="flabel">
+          Facilitador / Instrutor
+          <span class="req">*</span>
+        </div>
+
+        <input
+          type="text"
+          required
+          placeholder="Nome completo e área">
+
+      </div>
+
+    </div>
+
+
+    <hr class="div">
+
+
+    <div class="sub-ttl">
+      📚 Conteúdo Assíncrono na Plataforma
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Estrutura de Módulos e Conteúdos
+        <span class="req">*</span>
+      </div>
+
+      <textarea
+        required
+        rows="6"
+        placeholder="Módulo 1 — [Título]:
+Conteúdo 1: [nome]
+Conteúdo 2: [nome]
+
+Módulo 2 — [Título]:
+Conteúdo 1: [nome]"></textarea>
+
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Há vídeos a produzir junto à NUCOM?
+        <span class="req">*</span>
+      </div>
+
+
+      <label class="ropt">
+
+        <input
+          type="radio"
+          name="videos_h"
+          value="sim"
+          onchange="tog('videos-h-blk',true)">
+
+        <div class="ropt-lbl">
+          Sim
+        </div>
+
+      </label>
+
+
+      <label class="ropt">
+
+        <input
+          type="radio"
+          name="videos_h"
+          value="nao"
+          onchange="tog('videos-h-blk',false)">
+
+        <div class="ropt-lbl">
+          Não
+        </div>
+
+      </label>
+
+    </div>
+
+
+    <div
+      id="videos-h-blk"
+      class="cond-blk">
+
+      <div class="field">
+
+        <div class="flabel">
+          Roteiro das Gravações
+          <span class="req">*</span>
+        </div>
+
+        <textarea
+          rows="4"
+          placeholder="Vídeo 1 — Módulo 1: [roteiro]"></textarea>
+
+      </div>
+
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Materiais Complementares à NUCOM
+      </div>
+
+      <textarea
+        rows="2"
+        placeholder="Imagens, tabelas, esquemas, capa da ação…"></textarea>
+
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Cronograma com a NUCOM
+      </div>
+
+      <textarea
+        rows="2"
+        placeholder="Datas previstas para cada etapa de produção"></textarea>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ========================================================= -->
+<!-- SEÇÃO 3 -->
+<!-- ========================================================= -->
+
+<div id="sec-S3" class="sec-panel">
+
+  <div class="sec-head">
+
+    <div class="sec-num">
+      03
+    </div>
+
+    <div>
+
+      <div class="sec-ttl">
+        Avaliação
+      </div>
+
+      <div class="sec-sub">
+        Configuração e questões da avaliação da ação formativa
+      </div>
+
+      <span class="badge b-all">
+        TODAS AS MODALIDADES
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <div class="sec-body">
+
+
+    <div class="field">
+
+      <div
+        class="flabel"
+        style="font-size:15px;color:var(--navy)">
+
+        ★ Tipo de Questão da Avaliação
+        <span class="req">*</span>
+
+      </div>
+
+
+      <div class="fhelp">
+        A escolha define o modelo de preenchimento das questões abaixo.
+      </div>
+
+
+      <label class="ropt">
+
+        <input
+          type="radio"
+          name="tipo_q"
+          value="mc"
+          onchange="setTipoQ('mc')">
+
+        <div>
+
+          <div class="ropt-lbl">
+            Múltipla Escolha
+          </div>
+
+          <div class="ropt-desc">
+            4 alternativas (A, B, C, D); apenas uma correta.
+          </div>
+
+        </div>
+
+      </label>
+
+
+      <label class="ropt">
+
+        <input
+          type="radio"
+          name="tipo_q"
+          value="vf"
+          onchange="setTipoQ('vf')">
+
+        <div>
+
+          <div class="ropt-lbl">
+            Verdadeiro ou Falso
+          </div>
+
+          <div class="ropt-desc">
+            Afirmação a ser julgada como Verdadeira ou Falsa.
+          </div>
+
+        </div>
+
+      </label>
+
+
+      <label class="ropt">
+
+        <input
+          type="radio"
+          name="tipo_q"
+          value="ambos"
+          onchange="setTipoQ('ambos')">
+
+        <div>
+
+          <div class="ropt-lbl">
+            Ambos
+          </div>
+
+          <div class="ropt-desc">
+            A avaliação misturará múltipla escolha e verdadeiro ou falso.
+          </div>
+
+        </div>
+
+      </label>
+
+    </div>
+
+
+    <hr class="div">
+
+
+    <div class="g3">
+
+      <div class="field">
+
+        <div class="flabel">
+          Nº de Questões
+          <span class="req">*</span>
+        </div>
+
+        <div class="fhelp">
+          Mín. 6 | Máx. 10
+        </div>
+
+        <input
+          id="numeroQuestoes"
+          type="number"
+          min="6"
+          max="10"
+          required
+          placeholder="Ex.: 8">
+
+      </div>
+
+
+      <div class="field">
+
+        <div class="flabel">
+          % Mínimo para Aprovação
+          <span class="req">*</span>
+        </div>
+
+        <input
+          type="number"
+          min="0"
+          max="100"
+          required
+          placeholder="Ex.: 70">
+
+      </div>
+
+
+      <div class="field">
+
+        <div class="flabel">
+          Nº de Tentativas
+          <span class="req">*</span>
+        </div>
+
+        <input
+          type="number"
+          min="1"
+          required
+          placeholder="Ex.: 3">
+
+      </div>
+
+    </div>
+
+
+    <hr class="div">
+
+
+    <div
+      id="q-instrucao"
+      style="
+        font-size:13px;
+        color:var(--muted);
+        margin-bottom:14px;
+        padding:10px 13px;
+        background:#F5F7F9;
+        border-radius:6px;
+        line-height:1.6">
+
+      ☝️ Selecione o tipo de questão acima para ver o modelo de preenchimento.
+
+    </div>
+
+
+    <div id="q-container"></div>
+
+  </div>
+
+</div>
+
+
+<!-- ========================================================= -->
+<!-- SEÇÃO 4 -->
+<!-- ========================================================= -->
+
+<div id="sec-S4" class="sec-panel">
+
+  <div class="sec-head">
+
+    <div class="sec-num">
+      04
+    </div>
+
+    <div>
+
+      <div class="sec-ttl">
+        Certificado
+      </div>
+
+      <div class="sec-sub">
+        Assinaturas obrigatória e opcional para emissão do certificado
+      </div>
+
+      <span class="badge b-all">
+        TODAS AS MODALIDADES
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <div class="sec-body">
+
+
+    <div class="ibox info">
+
+      <span class="ic">
+        📄
+      </span>
+
+      <span>
+        A rubrica deve ser digitalizada em
+        <strong>papel branco, somente a assinatura</strong>,
+        sem moldura ou fundo.
+        Nomear:
+        <code>rubrica_assinatura1.jpg</code>
+      </span>
+
+    </div>
+
+
+    <div class="sig-blk">
+
+      <div class="sig-blk-ttl">
+        ✍️ Assinatura 1 — Direção (Obrigatório)
+      </div>
+
+
+      <div class="g2">
+
+        <div class="field">
+
+          <div class="flabel">
+            Nome Completo
+            <span class="req">*</span>
+          </div>
+
+          <input
+            type="text"
+            required
+            placeholder="Nome completo da autoridade signatária">
+
+        </div>
+
+
+        <div class="field">
+
+          <div class="flabel">
+            Cargo
+            <span class="req">*</span>
+          </div>
+
+          <input
+            type="text"
+            required
+            placeholder="Ex.: Diretora de Gestão de Pessoas">
+
+        </div>
+
+      </div>
+
+
+      <div class="upload-ph">
+
+        📎
+        <strong>Upload da Rubrica (obrigatório):</strong>
+        arquivo .jpg, papel branco, somente a assinatura.
+
+        <br>
+
+        Nomear:
+        <code>rubrica_assinatura1.jpg</code>
+
+        <br>
+
+        <em style="font-size:11px;color:#AAA">
+          Campo de upload disponível no Google Forms.
+        </em>
+
+      </div>
+
+    </div>
+
+
+    <div class="sig-blk">
+
+      <div class="sig-blk-ttl">
+        ✍️ Assinatura 2 — Segundo Responsável (Opcional)
+      </div>
+
+
+      <div class="g2">
+
+        <div class="field">
+
+          <div class="flabel">
+            Nome Completo
+          </div>
+
+          <input
+            type="text"
+            placeholder="Nome completo (se aplicável)">
+
+        </div>
+
+
+        <div class="field">
+
+          <div class="flabel">
+            Cargo
+          </div>
+
+          <input
+            type="text"
+            placeholder="Cargo do segundo responsável">
+
+        </div>
+
+      </div>
+
+
+      <div class="upload-ph">
+
+        📎
+        <strong>Upload da Rubrica (opcional):</strong>
+        Nomear:
+        <code>rubrica_assinatura2.jpg</code>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ========================================================= -->
+<!-- SEÇÃO 5 -->
+<!-- ========================================================= -->
+
+<div id="sec-S5" class="sec-panel">
+
+  <div class="sec-head">
+
+    <div class="sec-num">
+      05
+    </div>
+
+    <div>
+
+      <div class="sec-ttl">
+        Validação e Publicação
+      </div>
+
+      <div class="sec-sub">
+        Inserção na plataforma, validação cruzada e publicação da ação
+      </div>
+
+      <span class="badge b-all">
+        TODAS AS MODALIDADES
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <div class="sec-body">
+
+
+    <div class="ibox tip">
+
+      <span class="ic">
+        🔧
+      </span>
+
+      <span>
+        Esta seção é de uso interno — preenchida pela Área de Processos e Desenvolvimento em conjunto com o setor demandante ao final do processo.
+      </span>
+
+    </div>
+
+
+    <div class="g2">
+
+      <div class="field">
+
+        <div class="flabel">
+          Data Prevista para Inserção e Criação na Plataforma
+        </div>
+
+        <input type="date">
+
+      </div>
+
+
+      <div class="field">
+
+        <div class="flabel">
+          Data Prevista para Validação Cruzada
+        </div>
+
+        <input type="date">
+
+      </div>
+
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Houve necessidade de ajuste após a validação cruzada?
+      </div>
+
+      <div class="fhelp">
+        Se SIM, o material retorna para nova rodada de validação antes da validação final.
+      </div>
+
+
+      <label class="ropt">
+
+        <input
+          type="radio"
+          name="ajuste"
+          value="sim">
+
+        <div class="ropt-lbl">
+          Sim — material retorna para nova validação
+        </div>
+
+      </label>
+
+
+      <label class="ropt">
+
+        <input
+          type="radio"
+          name="ajuste"
+          value="nao">
+
+        <div class="ropt-lbl">
+          Não
+        </div>
+
+      </label>
+
+    </div>
+
+
+    <div class="g2">
+
+      <div class="field">
+
+        <div class="flabel">
+          Data da Validação Final
+        </div>
+
+        <input type="date">
+
+      </div>
+
+
+      <div class="field">
+
+        <div class="flabel">
+          Data Prevista de Publicação na Plataforma
+        </div>
+
+        <input type="date">
+
+      </div>
+
+    </div>
+
+
+    <div class="field">
+
+      <div class="flabel">
+        Observações Finais
+      </div>
+
+      <div class="fhelp">
+        Registre informações relevantes sobre o processo de validação e publicação.
+      </div>
+
+      <textarea
+        placeholder="Ex.: Versão revisada encaminhada após retorno do TCM em DD/MM…"></textarea>
+
+    </div>
+
+
+    <hr class="div">
+
+
+    <div
+      class="g2"
+      style="gap:18px">
+
+      <div
+        style="
+          text-align:center;
+          padding:18px;
+          border:1px solid #E0E0E0;
+          border-radius:8px">
+
+        <div
+          style="
+            font-size:13px;
+            font-weight:700;
+            color:var(--navy);
+            margin-bottom:18px">
+
+          Assinatura do Responsável do Setor
+
+        </div>
+
+
+        <div
+          style="
+            border-bottom:1px solid #333;
+            width:75%;
+            margin:0 auto 10px">
+        </div>
+
+
+        <div
+          class="field"
+          style="text-align:left;margin-bottom:6px">
+
+          <input
+            type="text"
+            placeholder="Nome">
+
+        </div>
+
+
+        <div
+          class="field"
+          style="margin-bottom:0">
+
+          <input type="date">
+
+        </div>
+
+      </div>
+
+
+      <div
+        style="
+          text-align:center;
+          padding:18px;
+          border:1px solid #E0E0E0;
+          border-radius:8px">
+
+        <div
+          style="
+            font-size:13px;
+            font-weight:700;
+            color:var(--navy);
+            margin-bottom:18px">
+
+          Validação — Educação Corporativa / DGP
+
+        </div>
+
+
+        <div
+          style="
+            border-bottom:1px solid #333;
+            width:75%;
+            margin:0 auto 10px">
+        </div>
+
+
+        <div
+          class="field"
+          style="text-align:left;margin-bottom:6px">
+
+          <input
+            type="text"
+            placeholder="Nome">
+
+        </div>
+
+
+        <div
+          class="field"
+          style="margin-bottom:0">
+
+          <input type="date">
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ========================================================= -->
+<!-- TELA FINAL -->
+<!-- ========================================================= -->
+
+<div id="done-scr">
+
+  <div
+    class="sec-body"
+    style="
+      border-radius:10px;
+      text-align:center;
+      padding:48px">
+
+    <div
+      style="
+        font-size:60px;
+        margin-bottom:14px">
+
+      ✅
+
+    </div>
+
+
+    <div
+      style="
+        font-size:22px;
+        font-weight:700;
+        color:var(--navy);
+        margin-bottom:8px">
+
+      Formulário concluído com sucesso!
+
+    </div>
+
+
+    <div
+      style="
+        font-size:14px;
+        color:var(--muted);
+        margin-bottom:6px">
+
+      Todos os campos foram preenchidos.
+
+    </div>
+
+
+    <div
+      style="
+        font-size:12px;
+        color:#AAA;
+        margin-bottom:28px">
+
+      Universidade Corporativa RioSaúde
+
+    </div>
+
+
+    <button
+      class="btn btn-next"
+      onclick="resetForm()">
+
+      + Novo Preenchimento
+
+    </button>
+
+  </div>
+
+</div>
+
+</div>
+
+
+<!-- ========================================================= -->
+<!-- BARRA DE NAVEGAÇÃO -->
+<!-- ========================================================= -->
+
+<div id="nav-bar">
+
+  <button
+    id="btn-back"
+    class="btn btn-back"
+    onclick="goBack()"
+    style="visibility:hidden">
+
+    ← Voltar
+
+  </button>
+
+
+  <div
+    class="nav-info"
+    id="nav-info">
+
+    <strong>
+      Seção 01 — Solicitação e Identificação
+    </strong>
+
+    <span>
+      TODAS AS MODALIDADES
+    </span>
+
+  </div>
+
+
+  <button
+    id="btn-next"
+    class="btn btn-next"
+    onclick="goNext()">
+
+    Avançar →
+
+  </button>
+
+</div>
+
+
 <script>
-var cur='S1',hist=[],tipo=null,gravar=null,tipoQ=null;
-var META={
- S1:{num:'01',ttl:'Solicitação e Identificação',badge:'TODAS AS MODALIDADES'},
- S2S:{num:'02',ttl:'Síncrona — Apresentação, Logística e Síntese',badge:'SÍNCRONA'},
- S2SG:{num:'02+',ttl:'Gravação da Ação Síncrona',badge:'CONDICIONAL'},
- S2A:{num:'02',ttl:'Assíncrona — Apresentação, Estrutura e Produção',badge:'ASSÍNCRONA'},
- S2H:{num:'02',ttl:'Híbrida — Apresentação, Logística e Produção',badge:'HÍBRIDA'},
- S3:{num:'03',ttl:'Avaliação',badge:'TODAS AS MODALIDADES'},
- S4:{num:'04',ttl:'Certificado',badge:'TODAS AS MODALIDADES'},
- S5:{num:'05',ttl:'Validação e Publicação',badge:'TODAS AS MODALIDADES'}
+
+/* =========================================================
+   ESTADO DO FORMULÁRIO
+========================================================= */
+
+let cur = 'S1';
+let hist = [];
+let tipo = null;
+let gravar = null;
+let tipoQ = null;
+
+
+/* =========================================================
+   METADADOS
+========================================================= */
+
+const META = {
+
+  S1:{
+    num:'01',
+    ttl:'Solicitação e Identificação',
+    badge:'TODAS AS MODALIDADES'
+  },
+
+  S2S:{
+    num:'02',
+    ttl:'Síncrona — Apresentação, Logística e Síntese',
+    badge:'SÍNCRONA'
+  },
+
+  S2SG:{
+    num:'02+',
+    ttl:'Gravação da Ação Síncrona',
+    badge:'CONDICIONAL'
+  },
+
+  S2A:{
+    num:'02',
+    ttl:'Assíncrona — Apresentação, Estrutura e Produção',
+    badge:'ASSÍNCRONA'
+  },
+
+  S2H:{
+    num:'02',
+    ttl:'Híbrida — Apresentação, Logística e Produção',
+    badge:'HÍBRIDA'
+  },
+
+  S3:{
+    num:'03',
+    ttl:'Avaliação',
+    badge:'TODAS AS MODALIDADES'
+  },
+
+  S4:{
+    num:'04',
+    ttl:'Certificado',
+    badge:'TODAS AS MODALIDADES'
+  },
+
+  S5:{
+    num:'05',
+    ttl:'Validação e Publicação',
+    badge:'TODAS AS MODALIDADES'
+  }
+
 };
-var STEP_LBL={S1:'01 Solicitação',S2S:'02 Síncrona',S2SG:'02+ Gravação',S2A:'02 Assíncrona',S2H:'02 Híbrida',S3:'03 Avaliação',S4:'04 Certificado',S5:'05 Validação'};
+
+
+const STEP_LBL = {
+
+  S1:'01 Solicitação',
+  S2S:'02 Síncrona',
+  S2SG:'02+ Gravação',
+  S2A:'02 Assíncrona',
+  S2H:'02 Híbrida',
+  S3:'03 Avaliação',
+  S4:'04 Certificado',
+  S5:'05 Validação'
+
+};
+
+
+/* =========================================================
+   PRÓXIMA SEÇÃO
+========================================================= */
 
 function getNext(s){
- if(s==='S1'){if(tipo==='sincrona')return'S2S';if(tipo==='assincrona')return'S2A';if(tipo==='hibrida')return'S2H';return null;}
- if(s==='S2S'){if(gravar==='sim')return'S2SG';if(gravar==='nao')return'S3';return null;}
- if(s==='S2SG'||s==='S2A'||s==='S2H')return'S3';
- if(s==='S3')return'S4';if(s==='S4')return'S5';if(s==='S5')return'DONE';return null;
+
+  if(s === 'S1'){
+
+    if(tipo === 'sincrona'){
+      return 'S2S';
+    }
+
+    if(tipo === 'assincrona'){
+      return 'S2A';
+    }
+
+    if(tipo === 'hibrida'){
+      return 'S2H';
+    }
+
+    return null;
+  }
+
+
+  if(s === 'S2S'){
+
+    if(gravar === 'sim'){
+      return 'S2SG';
+    }
+
+    if(gravar === 'nao'){
+      return 'S3';
+    }
+
+    return null;
+  }
+
+
+  if(
+    s === 'S2SG' ||
+    s === 'S2A' ||
+    s === 'S2H'
+  ){
+    return 'S3';
+  }
+
+
+  if(s === 'S3'){
+    return 'S4';
+  }
+
+
+  if(s === 'S4'){
+    return 'S5';
+  }
+
+
+  if(s === 'S5'){
+    return 'DONE';
+  }
+
+
+  return null;
+
 }
+
+
+/* =========================================================
+   CAMINHO DO FORMULÁRIO
+========================================================= */
+
 function getPath(){
- var b=['S1'];
- if(tipo==='sincrona'){b.push('S2S');if(gravar==='sim')b.push('S2SG');}
- else if(tipo==='assincrona')b.push('S2A');
- else if(tipo==='hibrida')b.push('S2H');
- else b.push('2S/2A/2H');
- b.push('S3','S4','S5');return b;
+
+  const b = ['S1'];
+
+
+  if(tipo === 'sincrona'){
+
+    b.push('S2S');
+
+    if(gravar === 'sim'){
+      b.push('S2SG');
+    }
+
+  }
+
+  else if(tipo === 'assincrona'){
+
+    b.push('S2A');
+
+  }
+
+  else if(tipo === 'hibrida'){
+
+    b.push('S2H');
+
+  }
+
+  else{
+
+    b.push('S2S/2A/2H');
+
+  }
+
+
+  b.push('S3','S4','S5');
+
+  return b;
+
 }
+
+
+/* =========================================================
+   VALIDAÇÃO
+========================================================= */
+
+function validateSection(){
+
+  const sec = document.getElementById('sec-' + cur);
+
+  if(!sec){
+    return true;
+  }
+
+
+  /*
+   * Remove marcações antigas
+   */
+
+  sec.querySelectorAll('.input-error').forEach(function(el){
+
+    el.classList.remove('input-error');
+
+  });
+
+
+  /*
+   * Campos obrigatórios
+   */
+
+  const required = sec.querySelectorAll(
+    'input[required], textarea[required], select[required]'
+  );
+
+
+  for(const field of required){
+
+    if(field.offsetParent === null){
+      continue;
+    }
+
+
+    if(!String(field.value || '').trim()){
+
+      field.classList.add('input-error');
+
+      field.focus();
+
+      alert('Preencha todos os campos obrigatórios antes de avançar.');
+
+      return false;
+    }
+
+
+    /*
+     * Validação de e-mail
+     */
+
+    if(field.type === 'email'){
+
+      const emailOK =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value.trim());
+
+
+      if(!emailOK){
+
+        field.classList.add('input-error');
+
+        field.focus();
+
+        alert('Informe um endereço de e-mail válido.');
+
+        return false;
+      }
+
+    }
+
+  }
+
+
+  /*
+   * Seção 1 — urgência
+   */
+
+  if(cur === 'S1'){
+
+    const urgencia =
+      document.querySelector('input[name="urgencia"]:checked');
+
+
+    if(!urgencia){
+
+      alert('Informe se a situação é urgente.');
+
+      return false;
+    }
+
+
+    if(urgencia.value === 'sim'){
+
+      const bloco =
+        document.getElementById('urgencia-blk');
+
+
+      const campo =
+        bloco.querySelector('textarea');
+
+
+      if(!campo.value.trim()){
+
+        campo.classList.add('input-error');
+
+        campo.focus();
+
+        alert('Descreva o detalhamento da urgência.');
+
+        return false;
+      }
+
+    }
+
+
+    if(!tipo){
+
+      alert('Selecione o tipo de ação formativa.');
+
+      return false;
+    }
+
+  }
+
+
+  /*
+   * Seção S2S
+   */
+
+  if(cur === 'S2S'){
+
+    const nucom =
+      document.querySelector('input[name="nucom_s"]:checked');
+
+
+    if(!nucom){
+
+      alert('Informe se há apoio/participação da NUCOM.');
+
+      return false;
+    }
+
+
+    if(!gravar){
+
+      alert('Informe se a ação síncrona será gravada.');
+
+      return false;
+    }
+
+  }
+
+
+  /*
+   * Seção S2A
+   */
+
+  if(cur === 'S2A'){
+
+    const videos =
+      document.querySelector('input[name="videos_a"]:checked');
+
+
+    if(!videos){
+
+      alert('Informe se haverá vídeos a produzir junto à NUCOM.');
+
+      return false;
+    }
+
+
+    if(videos.value === 'sim'){
+
+      const bloco =
+        document.getElementById('videos-a-blk');
+
+      const roteiro =
+        bloco.querySelector('textarea');
+
+
+      if(!roteiro.value.trim()){
+
+        roteiro.classList.add('input-error');
+
+        roteiro.focus();
+
+        alert('Informe o roteiro das gravações.');
+
+        return false;
+      }
+
+    }
+
+  }
+
+
+  /*
+   * Seção S2H
+   */
+
+  if(cur === 'S2H'){
+
+    const videos =
+      document.querySelector('input[name="videos_h"]:checked');
+
+
+    if(!videos){
+
+      alert('Informe se haverá vídeos a produzir junto à NUCOM.');
+
+      return false;
+    }
+
+
+    if(videos.value === 'sim'){
+
+      const bloco =
+        document.getElementById('videos-h-blk');
+
+      const roteiro =
+        bloco.querySelector('textarea');
+
+
+      if(!roteiro.value.trim()){
+
+        roteiro.classList.add('input-error');
+
+        roteiro.focus();
+
+        alert('Informe o roteiro das gravações.');
+
+        return false;
+      }
+
+    }
+
+  }
+
+
+  /*
+   * Seção 3
+   */
+
+  if(cur === 'S3'){
+
+    const tipoQuestao =
+      document.querySelector('input[name="tipo_q"]:checked');
+
+
+    if(!tipoQuestao){
+
+      alert('Selecione o tipo de questão da avaliação.');
+
+      return false;
+    }
+
+
+    const numero =
+      document.getElementById('numeroQuestoes');
+
+
+    const n =
+      parseInt(numero.value,10);
+
+
+    if(isNaN(n) || n < 6 || n > 10){
+
+      numero.classList.add('input-error');
+
+      numero.focus();
+
+      alert('O número de questões deve estar entre 6 e 10.');
+
+      return false;
+    }
+
+
+    const questoes =
+      document.querySelectorAll('#q-container textarea');
+
+
+    for(let i=0;i<n;i++){
+
+      if(!questoes[i] || !questoes[i].value.trim()){
+
+        if(questoes[i]){
+          questoes[i].classList.add('input-error');
+          questoes[i].focus();
+        }
+
+        alert(
+          'Preencha a Questão ' +
+          (i+1) +
+          ' antes de avançar.'
+        );
+
+        return false;
+      }
+
+    }
+
+  }
+
+
+  return true;
+
+}
+
+
+/* =========================================================
+   AVANÇAR
+========================================================= */
+
 function goNext(){
- var n=getNext(cur);if(!n)return;
- if(n==='DONE'){showDone();return;}
- hist.push(cur);showSec(n);
+
+  if(!validateSection()){
+    return;
+  }
+
+
+  const n = getNext(cur);
+
+
+  if(!n){
+    return;
+  }
+
+
+  if(n === 'DONE'){
+
+    showDone();
+
+    return;
+  }
+
+
+  hist.push(cur);
+
+  showSec(n);
+
 }
-function goBack(){if(!hist.length)return;var p=hist.pop();showSec(p);}
+
+
+/* =========================================================
+   VOLTAR
+========================================================= */
+
+function goBack(){
+
+  if(!hist.length){
+    return;
+  }
+
+
+  const p = hist.pop();
+
+  showSec(p);
+
+}
+
+
+/* =========================================================
+   MOSTRAR SEÇÃO
+========================================================= */
+
 function showSec(s){
- document.querySelectorAll('.sec-panel').forEach(function(e){e.classList.remove('active');});
- var t=document.getElementById('sec-'+s);if(t)t.classList.add('active');
- cur=s;updateNav();updateProg();updateFlow();
- window.scrollTo({top:0,behavior:'smooth'});
+
+  document
+    .querySelectorAll('.sec-panel')
+    .forEach(function(e){
+
+      e.classList.remove('active');
+
+    });
+
+
+  const t =
+    document.getElementById('sec-' + s);
+
+
+  if(t){
+    t.classList.add('active');
+  }
+
+
+  cur = s;
+
+  updateNav();
+  updateProg();
+  updateFlow();
+
+
+  window.scrollTo({
+    top:0,
+    behavior:'smooth'
+  });
+
 }
+
+
+/* =========================================================
+   TELA FINAL
+========================================================= */
+
 function showDone(){
- document.querySelectorAll('.sec-panel').forEach(function(e){e.classList.remove('active');});
- document.getElementById('done-scr').style.display='block';
- document.getElementById('nav-bar').style.display='none';
- document.getElementById('hdr').style.display='none';
- document.getElementById('flow-map').style.display='none';
- window.scrollTo({top:0,behavior:'smooth'});
+
+  document
+    .querySelectorAll('.sec-panel')
+    .forEach(function(e){
+
+      e.classList.remove('active');
+
+    });
+
+
+  document
+    .getElementById('done-scr')
+    .style.display = 'block';
+
+
+  document
+    .getElementById('nav-bar')
+    .style.display = 'none';
+
+
+  document
+    .getElementById('hdr')
+    .style.display = 'none';
+
+
+  document
+    .getElementById('flow-map')
+    .style.display = 'none';
+
+
+  window.scrollTo({
+    top:0,
+    behavior:'smooth'
+  });
+
 }
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
 function resetForm(){
- cur='S1';hist=[];tipo=null;gravar=null;tipoQ=null;
- document.getElementById('done-scr').style.display='none';
- document.getElementById('nav-bar').style.display='flex';
- document.getElementById('hdr').style.display='block';
- document.getElementById('flow-map').style.display='block';
- document.querySelectorAll('input[type=radio]').forEach(function(r){r.checked=false;});
- document.querySelectorAll('input[type=text],input[type=email],input[type=date],input[type=number],textarea').forEach(function(e){e.value='';});
- document.querySelectorAll('.cond-blk').forEach(function(e){e.classList.remove('show');});
- document.getElementById('tipo-rhint').style.display='none';
- document.getElementById('gravar-rhint').style.display='none';
- document.getElementById('q-container').innerHTML='';
- document.getElementById('q-instrucao').textContent='☝️ Selecione o tipo de questão acima para ver o modelo de preenchimento.';
- showSec('S1');
+
+  cur = 'S1';
+  hist = [];
+  tipo = null;
+  gravar = null;
+  tipoQ = null;
+
+
+  document
+    .getElementById('done-scr')
+    .style.display = 'none';
+
+
+  document
+    .getElementById('nav-bar')
+    .style.display = 'flex';
+
+
+  document
+    .getElementById('hdr')
+    .style.display = 'block';
+
+
+  document
+    .getElementById('flow-map')
+    .style.display = 'block';
+
+
+  document
+    .querySelectorAll('input[type=radio]')
+    .forEach(function(r){
+
+      r.checked = false;
+
+    });
+
+
+  document
+    .querySelectorAll(
+      'input[type=text], input[type=email], input[type=date], input[type=number], textarea'
+    )
+    .forEach(function(e){
+
+      e.value = '';
+
+    });
+
+
+  document
+    .querySelectorAll('.cond-blk')
+    .forEach(function(e){
+
+      e.classList.remove('show');
+
+    });
+
+
+  document
+    .querySelectorAll('.input-error')
+    .forEach(function(e){
+
+      e.classList.remove('input-error');
+
+    });
+
+
+  document
+    .getElementById('tipo-rhint')
+    .style.display = 'none';
+
+
+  document
+    .getElementById('gravar-rhint')
+    .style.display = 'none';
+
+
+  document
+    .getElementById('q-container')
+    .innerHTML = '';
+
+
+  document
+    .getElementById('q-instrucao')
+    .textContent =
+      '☝️ Selecione o tipo de questão acima para ver o modelo de preenchimento.';
+
+
+  showSec('S1');
+
 }
+
+
+/* =========================================================
+   ATUALIZA NAVEGAÇÃO
+========================================================= */
+
 function updateNav(){
- var n=getNext(cur);
- var bb=document.getElementById('btn-back');
- var bn=document.getElementById('btn-next');
- var ni=document.getElementById('nav-info');
- bb.style.visibility=hist.length>0?'visible':'hidden';
- if(!n){bn.disabled=true;bn.textContent='Selecione uma opção para avançar';}
- else{bn.disabled=false;bn.textContent=n==='DONE'?'Enviar formulário ✓':'Avançar →';}
- var m=META[cur];
- if(m)ni.innerHTML='<strong>Seção '+m.num+' — '+m.ttl+'</strong><span>'+m.badge+'</span>';
+
+  const n = getNext(cur);
+
+  const bb =
+    document.getElementById('btn-back');
+
+  const bn =
+    document.getElementById('btn-next');
+
+  const ni =
+    document.getElementById('nav-info');
+
+
+  bb.style.visibility =
+    hist.length > 0
+      ? 'visible'
+      : 'hidden';
+
+
+  if(!n){
+
+    bn.disabled = true;
+
+    bn.textContent =
+      'Selecione uma opção para avançar';
+
+  }
+
+  else{
+
+    bn.disabled = false;
+
+    bn.textContent =
+      n === 'DONE'
+        ? 'Enviar formulário ✓'
+        : 'Avançar →';
+
+  }
+
+
+  const m = META[cur];
+
+
+  if(m){
+
+    ni.innerHTML =
+      '<strong>Seção ' +
+      m.num +
+      ' — ' +
+      m.ttl +
+      '</strong>' +
+      '<span>' +
+      m.badge +
+      '</span>';
+
+  }
+
 }
+
+
+/* =========================================================
+   PROGRESSO
+========================================================= */
+
 function updateProg(){
- var path=getPath();
- var wrap=document.getElementById('prog-wrap');
- var bar=document.getElementById('prog-bar');
- var lbl=document.getElementById('prog-lbl');
- var real=path.filter(function(s){return!!META[s];});
- var idx=real.indexOf(cur);
- if(tipo){
- wrap.style.display='block';
- bar.innerHTML=real.map(function(s,i){return'<div class="prog-seg'+(i<=idx?' on':'')+'"></div>';}).join('');
- lbl.textContent='Seção '+(idx+1)+' de '+real.length;
- }else{wrap.style.display='none';}
+
+  const path = getPath();
+
+  const wrap =
+    document.getElementById('prog-wrap');
+
+  const bar =
+    document.getElementById('prog-bar');
+
+  const lbl =
+    document.getElementById('prog-lbl');
+
+
+  const real =
+    path.filter(function(s){
+
+      return !!META[s];
+
+    });
+
+
+  const idx =
+    real.indexOf(cur);
+
+
+  if(tipo){
+
+    wrap.style.display = 'block';
+
+
+    bar.innerHTML =
+      real.map(function(s,i){
+
+        return '<div class="prog-seg ' +
+          (i <= idx ? 'on' : '') +
+          '"></div>';
+
+      }).join('');
+
+
+    lbl.textContent =
+      'Seção ' +
+      (idx + 1) +
+      ' de ' +
+      real.length;
+
+  }
+
+  else{
+
+    wrap.style.display = 'none';
+
+  }
+
 }
+
+
+/* =========================================================
+   FLUXO
+========================================================= */
+
 function updateFlow(){
- var path=getPath();
- var el=document.getElementById('flow-steps');
- el.innerHTML='';
- path.forEach(function(s,i){
- if(i>0){var a=document.createElement('span');a.className='farrow';a.textContent='→';el.appendChild(a);}
- var d=document.createElement('div');d.className='fs';
- if(s===cur)d.classList.add('active');
- else if(hist.indexOf(s)>=0)d.classList.add('done');
- else d.classList.add('pending');
- d.textContent=STEP_LBL[s]||s;el.appendChild(d);
- });
+
+  const path = getPath();
+
+  const el =
+    document.getElementById('flow-steps');
+
+
+  el.innerHTML = '';
+
+
+  path.forEach(function(s,i){
+
+    if(i > 0){
+
+      const a =
+        document.createElement('span');
+
+      a.className = 'farrow';
+
+      a.textContent = '→';
+
+      el.appendChild(a);
+
+    }
+
+
+    const d =
+      document.createElement('div');
+
+    d.className = 'fs';
+
+
+    if(s === cur){
+
+      d.classList.add('active');
+
+    }
+
+    else if(hist.indexOf(s) >= 0){
+
+      d.classList.add('done');
+
+    }
+
+    else{
+
+      d.classList.add('pending');
+
+    }
+
+
+    d.textContent =
+      STEP_LBL[s] || s;
+
+
+    el.appendChild(d);
+
+  });
+
 }
-function tog(id,show){var e=document.getElementById(id);if(e)e.classList.toggle('show',show);}
+
+
+/* =========================================================
+   MOSTRAR / OCULTAR BLOCO CONDICIONAL
+========================================================= */
+
+function tog(id,show){
+
+  const e =
+    document.getElementById(id);
+
+
+  if(e){
+
+    e.classList.toggle(
+      'show',
+      show
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   TIPO DA AÇÃO
+========================================================= */
+
 function setTipo(v){
- tipo=v;
- var msgs={sincrona:'→ Ir para Seção 2S — Síncrona: Apresentação, Logística e Síntese',assincrona:'→ Ir para Seção 2A — Assíncrona: Apresentação, Estrutura e Produção',hibrida:'→ Ir para Seção 2H — Híbrida: Apresentação, Logística e Produção'};
- var h=document.getElementById('tipo-rhint');h.textContent=msgs[v]||'';h.style.display='block';
- updateNav();updateProg();updateFlow();
+
+  tipo = v;
+
+
+  const msgs = {
+
+    sincrona:
+      '→ Ir para Seção 2S — Síncrona: Apresentação, Logística e Síntese',
+
+    assincrona:
+      '→ Ir para Seção 2A — Assíncrona: Apresentação, Estrutura e Produção',
+
+    hibrida:
+      '→ Ir para Seção 2H — Híbrida: Apresentação, Logística e Produção'
+
+  };
+
+
+  const h =
+    document.getElementById('tipo-rhint');
+
+
+  h.textContent =
+    msgs[v] || '';
+
+
+  h.style.display = 'block';
+
+
+  updateNav();
+  updateProg();
+  updateFlow();
+
 }
+
+
+/* =========================================================
+   GRAVAÇÃO
+========================================================= */
+
 function setGravar(v){
- gravar=v;
- var h=document.getElementById('gravar-rhint');
- h.textContent=v==='sim'?'→ Ir para Seção 2SG — Gravação da Ação Síncrona':'→ Ir para Seção 3 — Avaliação';
- h.style.display='block';updateNav();updateProg();updateFlow();
+
+  gravar = v;
+
+
+  const h =
+    document.getElementById('gravar-rhint');
+
+
+  h.textContent =
+    v === 'sim'
+      ? '→ Ir para Seção 2SG — Gravação da Ação Síncrona'
+      : '→ Ir para Seção 3 — Avaliação';
+
+
+  h.style.display = 'block';
+
+
+  updateNav();
+  updateProg();
+  updateFlow();
+
 }
-function setTipoQ(tipo){
- tipoQ=tipo;
- var msgs={mc:'📝 Use o modelo: ENUNCIADO + A) B) C) D) + GABARITO (letra correta). Questões 1–6 obrigatórias; 7–10 opcionais.',vf:'📝 Use o modelo: AFIRMAÇÃO + GABARITO (Verdadeiro ou Falso). Questões 1–6 obrigatórias; 7–10 opcionais.',ambos:'📝 Indique TIPO no início de cada questão (MC ou VF). Use o modelo correspondente. Questões 1–6 obrigatórias; 7–10 opcionais.'};
- document.getElementById('q-instrucao').textContent=msgs[tipo]||'';
- var phs={
- mc:function(n){return'Q'+n+' — TIPO: Múltipla Escolha\nENUNCIADO: [texto da pergunta]\nA) \nB) \nC) \nD) \nGABARITO: [letra correta]';},
- vf:function(n){return'Q'+n+' — TIPO: Verdadeiro ou Falso\nENUNCIADO: [afirmação a ser julgada]\nGABARITO: [Verdadeiro / Falso]';},
- ambos:function(n){return'Q'+n+' — TIPO: [Múltipla Escolha / Verdadeiro ou Falso]\nENUNCIADO: \n[alternativas se MC / afirmação se VF]\nGABARITO: ';}
- };
- var c=document.getElementById('q-container');c.innerHTML='';
- for(var i=1;i<=10;i++){
- var opt=i>6;
- var b=document.createElement('div');b.className='q-blk';
- var rows=tipo==='mc'?7:5;
- b.innerHTML='<div class="q-blk-lbl">Questão '+i+(opt?' <span style="color:#999;font-weight:400">(opcional)</span>':'<span style="color:#d93025"> *</span>')+'</div><textarea placeholder="'+phs[tipo](i).replace(/"/g,'&quot;')+'" rows="'+rows+'"></textarea>';
- c.appendChild(b);
- }
+
+
+/* =========================================================
+   TIPO DE QUESTÃO
+========================================================= */
+
+function setTipoQ(tipoSelecionado){
+
+  tipoQ = tipoSelecionado;
+
+
+  const msgs = {
+
+    mc:
+      '📝 Use o modelo: ENUNCIADO + A) B) C) D) + GABARITO (letra correta). Questões 1–6 obrigatórias; 7–10 opcionais.',
+
+    vf:
+      '📝 Use o modelo: AFIRMAÇÃO + GABARITO (Verdadeiro ou Falso). Questões 1–6 obrigatórias; 7–10 opcionais.',
+
+    ambos:
+      '📝 Indique TIPO no início de cada questão (MC ou VF). Use o modelo correspondente. Questões 1–6 obrigatórias; 7–10 opcionais.'
+
+  };
+
+
+  document
+    .getElementById('q-instrucao')
+    .textContent =
+      msgs[tipoSelecionado] || '';
+
+
+  const phs = {
+
+    mc:function(n){
+
+      return 'Q' + n +
+        ' — TIPO: Múltipla Escolha\n' +
+        'ENUNCIADO: [texto da pergunta]\n' +
+        'A) \n' +
+        'B) \n' +
+        'C) \n' +
+        'D) \n' +
+        'GABARITO: [letra correta]';
+
+    },
+
+
+    vf:function(n){
+
+      return 'Q' + n +
+        ' — TIPO: Verdadeiro ou Falso\n' +
+        'ENUNCIADO: [afirmação a ser julgada]\n' +
+        'GABARITO: [Verdadeiro / Falso]';
+
+    },
+
+
+    ambos:function(n){
+
+      return 'Q' + n +
+        ' — TIPO: [Múltipla Escolha / Verdadeiro ou Falso]\n' +
+        'ENUNCIADO: \n' +
+        '[alternativas se MC / afirmação se VF]\n' +
+        'GABARITO: ';
+
+    }
+
+  };
+
+
+  const c =
+    document.getElementById('q-container');
+
+
+  c.innerHTML = '';
+
+
+  for(let i=1;i<=10;i++){
+
+    const opt =
+      i > 6;
+
+
+    const b =
+      document.createElement('div');
+
+
+    b.className =
+      'q-blk';
+
+
+    const label =
+      'Questão ' +
+      i +
+      (
+        opt
+          ? ' (opcional)'
+          : ' *'
+      );
+
+
+    b.innerHTML =
+
+      '<div class="q-blk-lbl">' +
+      label +
+      '</div>' +
+
+      '<textarea ' +
+
+      (i <= 6 ? 'required' : '') +
+
+      ' placeholder="' +
+
+      phs[tipoSelecionado](i)
+        .replace(/"/g,'&quot;') +
+
+      '" rows="' +
+
+      (
+        tipoSelecionado === 'mc'
+          ? 7
+          : 5
+      ) +
+
+      '"></textarea>';
+
+
+    c.appendChild(b);
+
+  }
+
 }
-// init
-updateNav();updateFlow();
+
+
+/* =========================================================
+   INICIALIZAÇÃO
+========================================================= */
+
+updateNav();
+updateFlow();
+
 </script>
+
 </body>
-</html>
+ </html>
