@@ -3008,9 +3008,6 @@ const STEP_LBL = {
 };
 
 
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/a/macros/prefeitura.rio/s/AKfycbx6KH0HwfKNB4Z3XhkslcEiHh6Tov7HjpUcj3CJn3pKnBf_aExSJYkF4HbqCh9MUgYV/exec';
-
-
 /* =========================================================
    PRÓXIMA SEÇÃO
 ========================================================= */
@@ -3438,6 +3435,152 @@ function validateSection(){
 
 
 /* =========================================================
+   INTEGRAÇÃO GOOGLE SHEETS
+========================================================= */
+
+// Cole aqui a URL /exec gerada no Google Apps Script.
+const GOOGLE_SCRIPT_URL = 'COLE_AQUI_A_URL_DO_SEU_WEB_APP';
+
+const CAMPOS_FORMULARIO = [
+  'setorDemandante', 'dataReuniao', 'responsavelConteudo', 'emailResponsavel',
+  'telefoneRamal', 'estrategiaExecucao', 'recursosDidaticos',
+  'dataEnvioSolicitacao', 'detalhamentoUrgencia', 'tituloAcao', 'publicoAlvo',
+  'modalidadeEducacional', 'duracaoTotal', 'dataLimiteLancamento',
+  'validadeCertificado',
+  'apresentacaoSincrona', 'descricaoPortalSincrona',
+  'informacoesPlataformaSincrona', 'materiaisApoioSincrona',
+  'dataRealizacaoSincrona', 'horarioSincrona', 'localFormatoSincrona',
+  'facilitadorSincrona', 'numeroParticipantes', 'sinteseConteudo',
+  'dataAcaoGravacao', 'horarioGravacao', 'localFormatoGravacao',
+  'observacoesGravacao',
+  'apresentacaoAssincrona', 'descricaoPortalAssincrona',
+  'estruturaModulosAssincrona', 'fechamentoVideos',
+  'roteiroGravacoesAssincrona', 'duracaoVideosAssincrona',
+  'dataEnvioRoteiroNucom', 'materiaisComplementaresAssincrona',
+  'cronogramaNucomAssincrona',
+  'apresentacaoHibrida', 'descricaoPortalHibrida',
+  'informacoesEncontroSincrono', 'materiaisApoioHibrida',
+  'dataEncontroHibrida', 'horarioHibrida', 'localFormatoHibrida',
+  'facilitadorHibrida', 'estruturaModulosHibrida',
+  'roteiroGravacoesHibrida', 'materiaisComplementaresHibrida',
+  'cronogramaHibrida',
+  'numeroQuestoes', 'percentualAprovacao', 'numeroTentativas',
+  'nomeAssinatura1', 'cargoAssinatura1', 'nomeAssinatura2', 'cargoAssinatura2',
+  'dataInsercaoPlataforma', 'dataValidacaoCruzada', 'dataValidacaoFinal',
+  'dataPublicacaoPlataforma', 'observacoesFinais', 'nomeResponsavelSetor',
+  'dataAssinaturaSetor', 'nomeValidadorDGP', 'dataValidacaoDGP'
+];
+
+function gerarIdEnvio() {
+  if (window.crypto && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+  return 'envio-' + Date.now() + '-' + Math.random().toString(36).slice(2);
+}
+
+function coletarDadosFormulario() {
+  const dados = {
+    data_envio: new Date().toISOString(),
+    submission_id: gerarIdEnvio(),
+    tipo_acao: tipo || '',
+    gravar_acao: gravar || '',
+    tipo_questao: tipoQ || '',
+    urgencia: '',
+    nucom: '',
+    videos_assincrona: '',
+    videos_hibrida: '',
+    ajuste: ''
+  };
+
+  CAMPOS_FORMULARIO.forEach(function(id) {
+    const campo = document.getElementById(id);
+    if (campo) {
+      dados[id] = campo.value || '';
+    }
+  });
+
+  const mapa = {
+    urgencia: 'urgencia',
+    nucom_s: 'nucom',
+    gravar: 'gravar_acao',
+    videos_a: 'videos_assincrona',
+    videos_h: 'videos_hibrida',
+    tipo_q: 'tipo_questao',
+    ajuste: 'ajuste'
+  };
+
+  document.querySelectorAll('input[type="radio"][name]').forEach(function(radio) {
+    if (!radio.checked) return;
+    const chave = mapa[radio.name];
+    if (chave) dados[chave] = radio.value || '';
+  });
+
+  for (let i = 1; i <= 10; i++) {
+    const campo = document.getElementById('questao_' + i);
+    dados['questao_' + i] = campo ? (campo.value || '') : '';
+  }
+
+  return dados;
+}
+
+function enviarParaGoogleSheets(dados) {
+  if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.indexOf('/exec') === -1) {
+    alert('A integração ainda não foi configurada. Cole a URL /exec do Google Apps Script no index.html.');
+    return false;
+  }
+
+  const payload = JSON.stringify(dados);
+
+  try {
+    if (navigator.sendBeacon) {
+      const blob = new Blob(
+        ['payload=' + encodeURIComponent(payload)],
+        { type: 'application/x-www-form-urlencoded;charset=UTF-8' }
+      );
+
+      if (navigator.sendBeacon(GOOGLE_SCRIPT_URL, blob)) {
+        return true;
+      }
+    }
+  } catch (erroBeacon) {
+    console.warn('sendBeacon falhou; tentando fetch.', erroBeacon);
+  }
+
+  fetch(GOOGLE_SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+    },
+    body: 'payload=' + encodeURIComponent(payload),
+    keepalive: true
+  }).catch(function(erroFetch) {
+    console.error('Falha no envio ao Google Apps Script:', erroFetch);
+  });
+
+  return true;
+}
+
+function enviarFormulario() {
+  const botao = document.getElementById('btn-next');
+  const dados = coletarDadosFormulario();
+
+  botao.disabled = true;
+  botao.textContent = 'Enviando...';
+
+  const enviado = enviarParaGoogleSheets(dados);
+
+  if (!enviado) {
+    botao.disabled = false;
+    botao.textContent = 'Enviar formulário ✓';
+    return;
+  }
+
+  showDone();
+}
+
+
+/* =========================================================
    AVANÇAR
 ========================================================= */
 
@@ -3458,7 +3601,7 @@ function goNext(){
 
   if(n === 'DONE'){
 
-    showDone();
+    enviarFormulario();
 
     return;
   }
