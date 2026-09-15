@@ -760,7 +760,8 @@ code{
           <span class="req">*</span>
         </div>
 
-        <input
+        <input id="setorDemandante"
+          id="setorDemandante"
           type="text"
           required
           placeholder="Ex.: Gerência de Enfermagem">
@@ -773,7 +774,7 @@ code{
           <span class="req">*</span>
         </div>
 
-        <input type="date" required>
+        <input id="dataReuniao" type="date" required>
       </div>
 
     </div>
@@ -786,7 +787,8 @@ code{
         <span class="req">*</span>
       </div>
 
-      <input
+      <input id="responsavelConteudo"
+        id="responsavelConteudo"
         type="text"
         required
         placeholder="Nome completo">
@@ -803,7 +805,8 @@ code{
           <span class="req">*</span>
         </div>
 
-        <input
+        <input id="emailResponsavel"
+          id="emailResponsavel"
           type="email"
           required
           placeholder="nome@riosaude.rio.br">
@@ -817,7 +820,7 @@ code{
           Telefone / Ramal
         </div>
 
-        <input
+        <input id="telefoneRamal"
           type="text"
           placeholder="(21) 99999-9999 | Ramal 123">
 
@@ -837,7 +840,7 @@ code{
         Resumo do alinhamento entre setor demandante e Área de Processos e Desenvolvimento/DGP.
       </div>
 
-      <textarea
+      <textarea id="estrategiaExecucao"
         required
         placeholder="Ex.: Ação em formato de curso EAD com vídeos curtos por módulo, avaliação ao final e certificação automática…"></textarea>
 
@@ -854,7 +857,7 @@ code{
         Ex.: vídeos, infográficos, estudo de caso, quiz, leituras complementares…
       </div>
 
-      <textarea
+      <textarea id="recursosDidaticos"
         placeholder="Liste os recursos acordados em reunião"
         rows="2"></textarea>
 
@@ -868,7 +871,7 @@ code{
         <span class="req">*</span>
       </div>
 
-      <input type="date" required>
+      <input id="dataEnvioSolicitacao" type="date" required>
 
     </div>
 
@@ -887,7 +890,7 @@ code{
 
       <label class="ropt">
 
-        <input
+        <input id="urgenciaSim"
           type="radio"
           name="urgencia"
           value="sim"
@@ -904,7 +907,7 @@ code{
 
       <label class="ropt">
 
-        <input
+        <input id="urgenciaNao"
           type="radio"
           name="urgencia"
           value="nao"
@@ -934,7 +937,7 @@ code{
           Descreva o órgão/diretoria, prazo e motivo.
         </div>
 
-        <textarea
+        <textarea id="detalhamentoUrgencia"
           placeholder="Ex.: Prazo determinado pelo TCM para emissão de certificados até DD/MM/AAAA…"></textarea>
 
       </div>
@@ -957,7 +960,7 @@ code{
         <span class="req">*</span>
       </div>
 
-      <input
+      <input id="tituloAcao"
         type="text"
         required
         placeholder="Ex.: Capacitação em Segurança do Trabalho">
@@ -972,7 +975,7 @@ code{
         <span class="req">*</span>
       </div>
 
-      <input
+      <input id="publicoAlvo"
         type="text"
         required
         placeholder="Ex.: Todos os profissionais que atuam na assistência">
@@ -993,7 +996,7 @@ code{
           Microtreinamento | Palestra | Treinamento | Oficina | Curso | Workshop | Capacitação
         </div>
 
-        <input
+        <input id="modalidadeEducacional"
           type="text"
           required
           placeholder="Ex.: Curso | Capacitação | Treinamento">
@@ -1008,7 +1011,7 @@ code{
           <span class="req">*</span>
         </div>
 
-        <input
+        <input id="duracaoTotal"
           type="text"
           required
           placeholder="Ex.: 4 horas | 1h30min">
@@ -1027,7 +1030,7 @@ code{
           <span class="req">*</span>
         </div>
 
-        <input type="date" required>
+        <input id="dataLimiteLancamento" type="date" required>
 
       </div>
 
@@ -1039,7 +1042,7 @@ code{
           <span class="req">*</span>
         </div>
 
-        <input
+        <input id="validadeCertificado"
           type="text"
           required
           placeholder="Ex.: 1 ano | Vitalício">
@@ -1074,7 +1077,7 @@ code{
 
       <label class="ropt">
 
-        <input
+        <input id="tipoAcaoSincrona"
           type="radio"
           name="tipo_acao"
           value="sincrona"
@@ -1097,7 +1100,7 @@ code{
 
       <label class="ropt">
 
-        <input
+        <input id="tipoAcaoAssincrona"
           type="radio"
           name="tipo_acao"
           value="assincrona"
@@ -1120,7 +1123,7 @@ code{
 
       <label class="ropt">
 
-        <input
+        <input id="tipoAcaoHibrida"
           type="radio"
           name="tipo_acao"
           value="hibrida"
@@ -1210,7 +1213,7 @@ code{
         Descreva a visão geral e objetivos. Contextualize o propósito institucional.
       </div>
 
-      <textarea
+      <textarea id="apresentacaoSincrona"
         required
         placeholder='Ex.: "Esta capacitação foi desenvolvida para profissionais que atuam em… Nosso objetivo é que você saia com compreensão clara sobre…"'></textarea>
 
@@ -1228,7 +1231,7 @@ code{
         Informe duração, prazo de conclusão e orientações gerais.
       </div>
 
-      <textarea
+      <textarea id="descricaoPortalSincrona"
         required
         placeholder='Ex.: "Este treinamento tem duração de aproximadamente 3 horas e você terá 10 dias úteis para concluí-lo…"'></textarea>
 
@@ -1241,7 +1244,7 @@ code{
         Informações Importantes a Exibir na Plataforma
       </div>
 
-      <textarea
+      <textarea id="informacoesPlataformaSincrona"
         placeholder="Liste as informações que devem aparecer na plataforma antes da avaliação"></textarea>
 
     </div>
@@ -1253,7 +1256,7 @@ code{
         Materiais de Apoio a Disponibilizar
       </div>
 
-      <textarea
+      <textarea id="materiaisApoioSincrona"
         rows="2"
         placeholder="Ex.: Manual X.pdf | Protocolo Y.pdf | Link do formulário Z"></textarea>
 
@@ -1277,7 +1280,7 @@ code{
           <span class="req">*</span>
         </div>
 
-        <input type="date" required>
+        <input id="dataRealizacaoSincrona" type="date" required>
 
       </div>
 
@@ -1289,7 +1292,7 @@ code{
           <span class="req">*</span>
         </div>
 
-        <input
+        <input id="horarioSincrona"
           type="text"
           required
           placeholder="09h00 às 12h00">
@@ -1308,7 +1311,7 @@ code{
           <span class="req">*</span>
         </div>
 
-        <input
+        <input id="localFormatoSincrona"
           type="text"
           required
           placeholder="Auditório Central | Zoom | Presencial + transmissão">
@@ -1323,7 +1326,7 @@ code{
           <span class="req">*</span>
         </div>
 
-        <input
+        <input id="facilitadorSincrona"
           type="text"
           required
           placeholder="Nome completo e área">
@@ -1339,7 +1342,7 @@ code{
         Nº de Vagas / Participantes Esperados
       </div>
 
-      <input
+      <input id="numeroParticipantes"
         type="number"
         min="1"
         placeholder="Ex.: 30"
@@ -1369,7 +1372,7 @@ Tópico 2 — [nome]: [síntese em 1-2 frases]
 
 Este conteúdo ficará na plataforma para contextualizar o profissional antes da avaliação.</div>
 
-      <textarea
+      <textarea id="sinteseConteudo"
         required
         rows="6"
         placeholder="Tópico 1 — Introdução: Breve contextualização histórica e relevância para a prática atual…
@@ -1388,7 +1391,7 @@ Tópico 2 — Procedimentos: Detalhamento dos protocolos institucionais…"></te
 
       <label class="ropt">
 
-        <input
+        <input id="nucomSim"
           type="radio"
           name="nucom_s"
           value="sim">
@@ -1402,7 +1405,7 @@ Tópico 2 — Procedimentos: Detalhamento dos protocolos institucionais…"></te
 
       <label class="ropt">
 
-        <input
+        <input id="nucomNao"
           type="radio"
           name="nucom_s"
           value="nao">
@@ -1440,7 +1443,7 @@ Tópico 2 — Procedimentos: Detalhamento dos protocolos institucionais…"></te
 
       <label class="ropt">
 
-        <input
+        <input id="gravarSim"
           type="radio"
           name="gravar"
           value="sim"
@@ -1463,7 +1466,7 @@ Tópico 2 — Procedimentos: Detalhamento dos protocolos institucionais…"></te
 
       <label class="ropt">
 
-        <input
+        <input id="gravarNao"
           type="radio"
           name="gravar"
           value="nao"
@@ -1551,7 +1554,7 @@ Tópico 2 — Procedimentos: Detalhamento dos protocolos institucionais…"></te
         A NUCOM será contatada para confirmar disponibilidade na data informada.
       </div>
 
-      <input type="date" required>
+      <input id="dataAcaoGravacao" type="date" required>
 
     </div>
 
@@ -1565,7 +1568,7 @@ Tópico 2 — Procedimentos: Detalhamento dos protocolos institucionais…"></te
           <span class="req">*</span>
         </div>
 
-        <input
+        <input id="horarioGravacao"
           type="text"
           required
           placeholder="09h00 às 12h00">
@@ -1580,7 +1583,7 @@ Tópico 2 — Procedimentos: Detalhamento dos protocolos institucionais…"></te
           <span class="req">*</span>
         </div>
 
-        <input
+        <input id="localFormatoGravacao"
           type="text"
           required
           placeholder="Auditório | Zoom | Teams">
@@ -1600,7 +1603,7 @@ Tópico 2 — Procedimentos: Detalhamento dos protocolos institucionais…"></te
         Número de apresentadores, materiais de apoio, necessidade de edição, entregas esperadas…
       </div>
 
-      <textarea
+      <textarea id="observacoesGravacao"
         placeholder="Descreva as necessidades específicas da gravação"></textarea>
 
     </div>
@@ -1651,7 +1654,7 @@ Tópico 2 — Procedimentos: Detalhamento dos protocolos institucionais…"></te
         <span class="req">*</span>
       </div>
 
-      <textarea
+      <textarea id="apresentacaoAssincrona"
         required
         placeholder='Ex.: "Esta capacitação foi desenvolvida para profissionais que…"'></textarea>
 
@@ -1665,7 +1668,7 @@ Tópico 2 — Procedimentos: Detalhamento dos protocolos institucionais…"></te
         <span class="req">*</span>
       </div>
 
-      <textarea
+      <textarea id="descricaoPortalAssincrona"
         required
         placeholder='Ex.: "Este treinamento tem duração de aproximadamente 3 horas e você terá 10 dias úteis para concluí-lo…"'></textarea>
 
@@ -1694,7 +1697,7 @@ Conteúdo 2: [nome]
 Módulo 2 — [Título]:
 Conteúdo 1: [nome] ...</div>
 
-      <textarea
+      <textarea id="estruturaModulosAssincrona"
         required
         rows="8"
         placeholder="Módulo 1 — Fundamentos:
@@ -1717,7 +1720,7 @@ Conteúdo 1: Protocolo institucional"></textarea>
         Ex.: Módulo 1 / Conteúdo 1: "Compreender os fundamentos é o primeiro passo para…"
       </div>
 
-      <textarea
+      <textarea id="fechamentoVideos"
         rows="3"
         placeholder="Módulo 1 / Conteúdo 1: [texto de fechamento]
 Módulo 1 / Conteúdo 2: [texto de fechamento]"></textarea>
@@ -1748,7 +1751,7 @@ Módulo 1 / Conteúdo 2: [texto de fechamento]"></textarea>
 
       <label class="ropt">
 
-        <input
+        <input id="videosAssincronaSim"
           type="radio"
           name="videos_a"
           value="sim"
@@ -1763,7 +1766,7 @@ Módulo 1 / Conteúdo 2: [texto de fechamento]"></textarea>
 
       <label class="ropt">
 
-        <input
+        <input id="videosAssincronaNao"
           type="radio"
           name="videos_a"
           value="nao"
@@ -1789,7 +1792,7 @@ Módulo 1 / Conteúdo 2: [texto de fechamento]"></textarea>
           <span class="req">*</span>
         </div>
 
-        <textarea
+        <textarea id="roteiroGravacoesAssincrona"
           rows="5"
           placeholder="Vídeo 1 — Módulo 1 / Conteúdo 1:
 [roteiro completo]"></textarea>
@@ -1805,7 +1808,7 @@ Módulo 1 / Conteúdo 2: [texto de fechamento]"></textarea>
             Duração Total Estimada
           </div>
 
-          <input
+          <input id="duracaoVideosAssincrona"
             type="text"
             placeholder="Ex.: 45 min | 3 vídeos de 15 min">
 
@@ -1818,7 +1821,7 @@ Módulo 1 / Conteúdo 2: [texto de fechamento]"></textarea>
             Data Prevista de Envio do Roteiro à NUCOM
           </div>
 
-          <input type="date">
+          <input id="dataEnvioRoteiroNucom" type="date">
 
         </div>
 
@@ -1837,7 +1840,7 @@ Módulo 1 / Conteúdo 2: [texto de fechamento]"></textarea>
         Imagens, tabelas, esquemas, capa da ação.
       </div>
 
-      <textarea
+      <textarea id="materiaisComplementaresAssincrona"
         rows="2"
         placeholder="Ex.: Logo em alta resolução, esquema do fluxo de atendimento…"></textarea>
 
@@ -1850,7 +1853,7 @@ Módulo 1 / Conteúdo 2: [texto de fechamento]"></textarea>
         Cronograma com a NUCOM
       </div>
 
-      <textarea
+      <textarea id="cronogramaNucomAssincrona"
         rows="2"
         placeholder="Ex.: Roteiro entregue: DD/MM | Gravação: DD/MM | Entrega final: DD/MM"></textarea>
 
@@ -1920,7 +1923,7 @@ Módulo 1 / Conteúdo 2: [texto de fechamento]"></textarea>
         <span class="req">*</span>
       </div>
 
-      <textarea
+      <textarea id="apresentacaoHibrida"
         required
         placeholder="Descreva visão geral e objetivos da ação híbrida…"></textarea>
 
@@ -1934,7 +1937,7 @@ Módulo 1 / Conteúdo 2: [texto de fechamento]"></textarea>
         <span class="req">*</span>
       </div>
 
-      <textarea
+      <textarea id="descricaoPortalHibrida"
         required
         placeholder='Ex.: "Esta capacitação combina um encontro presencial com conteúdo disponível na plataforma…"'></textarea>
 
@@ -1951,7 +1954,7 @@ Módulo 1 / Conteúdo 2: [texto de fechamento]"></textarea>
         Data, horário, link, pré-requisitos, documentos necessários para o encontro…
       </div>
 
-      <textarea
+      <textarea id="informacoesEncontroSincrono"
         placeholder="Ex.: O encontro presencial acontecerá no dia DD/MM às 09h00 no Auditório Central…"></textarea>
 
     </div>
@@ -1963,7 +1966,7 @@ Módulo 1 / Conteúdo 2: [texto de fechamento]"></textarea>
         Materiais de Apoio a Disponibilizar na Plataforma
       </div>
 
-      <textarea
+      <textarea id="materiaisApoioHibrida"
         rows="2"
         placeholder="Protocolo X.pdf | Link do formulário Y"></textarea>
 
@@ -1987,7 +1990,7 @@ Módulo 1 / Conteúdo 2: [texto de fechamento]"></textarea>
           <span class="req">*</span>
         </div>
 
-        <input type="date" required>
+        <input id="dataEncontroHibrida" type="date" required>
 
       </div>
 
@@ -1999,7 +2002,7 @@ Módulo 1 / Conteúdo 2: [texto de fechamento]"></textarea>
           <span class="req">*</span>
         </div>
 
-        <input
+        <input id="horarioHibrida"
           type="text"
           required
           placeholder="09h00 às 12h00">
@@ -2018,7 +2021,7 @@ Módulo 1 / Conteúdo 2: [texto de fechamento]"></textarea>
           <span class="req">*</span>
         </div>
 
-        <input
+        <input id="localFormatoHibrida"
           type="text"
           required
           placeholder="Auditório | Zoom | Teams">
@@ -2033,7 +2036,7 @@ Módulo 1 / Conteúdo 2: [texto de fechamento]"></textarea>
           <span class="req">*</span>
         </div>
 
-        <input
+        <input id="facilitadorHibrida"
           type="text"
           required
           placeholder="Nome completo e área">
@@ -2058,7 +2061,7 @@ Módulo 1 / Conteúdo 2: [texto de fechamento]"></textarea>
         <span class="req">*</span>
       </div>
 
-      <textarea
+      <textarea id="estruturaModulosHibrida"
         required
         rows="6"
         placeholder="Módulo 1 — [Título]:
@@ -2081,7 +2084,7 @@ Conteúdo 1: [nome]"></textarea>
 
       <label class="ropt">
 
-        <input
+        <input id="videosHibridaSim"
           type="radio"
           name="videos_h"
           value="sim"
@@ -2096,7 +2099,7 @@ Conteúdo 1: [nome]"></textarea>
 
       <label class="ropt">
 
-        <input
+        <input id="videosHibridaNao"
           type="radio"
           name="videos_h"
           value="nao"
@@ -2122,7 +2125,7 @@ Conteúdo 1: [nome]"></textarea>
           <span class="req">*</span>
         </div>
 
-        <textarea
+        <textarea id="roteiroGravacoesHibrida"
           rows="4"
           placeholder="Vídeo 1 — Módulo 1: [roteiro]"></textarea>
 
@@ -2137,7 +2140,7 @@ Conteúdo 1: [nome]"></textarea>
         Materiais Complementares à NUCOM
       </div>
 
-      <textarea
+      <textarea id="materiaisComplementaresHibrida"
         rows="2"
         placeholder="Imagens, tabelas, esquemas, capa da ação…"></textarea>
 
@@ -2150,7 +2153,7 @@ Conteúdo 1: [nome]"></textarea>
         Cronograma com a NUCOM
       </div>
 
-      <textarea
+      <textarea id="cronogramaHibrida"
         rows="2"
         placeholder="Datas previstas para cada etapa de produção"></textarea>
 
@@ -2214,7 +2217,7 @@ Conteúdo 1: [nome]"></textarea>
 
       <label class="ropt">
 
-        <input
+        <input id="tipoQuestaoMc"
           type="radio"
           name="tipo_q"
           value="mc"
@@ -2237,7 +2240,7 @@ Conteúdo 1: [nome]"></textarea>
 
       <label class="ropt">
 
-        <input
+        <input id="tipoQuestaoVf"
           type="radio"
           name="tipo_q"
           value="vf"
@@ -2260,7 +2263,7 @@ Conteúdo 1: [nome]"></textarea>
 
       <label class="ropt">
 
-        <input
+        <input id="tipoQuestaoAmbos"
           type="radio"
           name="tipo_q"
           value="ambos"
@@ -2299,7 +2302,7 @@ Conteúdo 1: [nome]"></textarea>
           Mín. 6 | Máx. 10
         </div>
 
-        <input
+        <input id="numeroQuestoes"
           id="numeroQuestoes"
           type="number"
           min="6"
@@ -2317,7 +2320,7 @@ Conteúdo 1: [nome]"></textarea>
           <span class="req">*</span>
         </div>
 
-        <input
+        <input id="percentualAprovacao"
           type="number"
           min="0"
           max="100"
@@ -2334,7 +2337,7 @@ Conteúdo 1: [nome]"></textarea>
           <span class="req">*</span>
         </div>
 
-        <input
+        <input id="numeroTentativas"
           type="number"
           min="1"
           required
@@ -2438,7 +2441,7 @@ Conteúdo 1: [nome]"></textarea>
             <span class="req">*</span>
           </div>
 
-          <input
+          <input id="nomeAssinatura1"
             type="text"
             required
             placeholder="Nome completo da autoridade signatária">
@@ -2453,7 +2456,7 @@ Conteúdo 1: [nome]"></textarea>
             <span class="req">*</span>
           </div>
 
-          <input
+          <input id="cargoAssinatura1"
             type="text"
             required
             placeholder="Ex.: Diretora de Gestão de Pessoas">
@@ -2500,7 +2503,7 @@ Conteúdo 1: [nome]"></textarea>
             Nome Completo
           </div>
 
-          <input
+          <input id="nomeAssinatura2"
             type="text"
             placeholder="Nome completo (se aplicável)">
 
@@ -2513,7 +2516,7 @@ Conteúdo 1: [nome]"></textarea>
             Cargo
           </div>
 
-          <input
+          <input id="cargoAssinatura2"
             type="text"
             placeholder="Cargo do segundo responsável">
 
@@ -2593,7 +2596,7 @@ Conteúdo 1: [nome]"></textarea>
           Data Prevista para Inserção e Criação na Plataforma
         </div>
 
-        <input type="date">
+        <input id="dataInsercaoPlataforma" type="date">
 
       </div>
 
@@ -2604,7 +2607,7 @@ Conteúdo 1: [nome]"></textarea>
           Data Prevista para Validação Cruzada
         </div>
 
-        <input type="date">
+        <input id="dataValidacaoCruzada" type="date">
 
       </div>
 
@@ -2624,7 +2627,7 @@ Conteúdo 1: [nome]"></textarea>
 
       <label class="ropt">
 
-        <input
+        <input id="ajusteSim"
           type="radio"
           name="ajuste"
           value="sim">
@@ -2638,7 +2641,7 @@ Conteúdo 1: [nome]"></textarea>
 
       <label class="ropt">
 
-        <input
+        <input id="ajusteNao"
           type="radio"
           name="ajuste"
           value="nao">
@@ -2660,7 +2663,7 @@ Conteúdo 1: [nome]"></textarea>
           Data da Validação Final
         </div>
 
-        <input type="date">
+        <input id="dataValidacaoFinal" type="date">
 
       </div>
 
@@ -2671,7 +2674,7 @@ Conteúdo 1: [nome]"></textarea>
           Data Prevista de Publicação na Plataforma
         </div>
 
-        <input type="date">
+        <input id="dataPublicacaoPlataforma" type="date">
 
       </div>
 
@@ -2688,7 +2691,7 @@ Conteúdo 1: [nome]"></textarea>
         Registre informações relevantes sobre o processo de validação e publicação.
       </div>
 
-      <textarea
+      <textarea id="observacoesFinais"
         placeholder="Ex.: Versão revisada encaminhada após retorno do TCM em DD/MM…"></textarea>
 
     </div>
@@ -2732,7 +2735,7 @@ Conteúdo 1: [nome]"></textarea>
           class="field"
           style="text-align:left;margin-bottom:6px">
 
-          <input
+          <input id="nomeResponsavelSetor"
             type="text"
             placeholder="Nome">
 
@@ -2743,7 +2746,7 @@ Conteúdo 1: [nome]"></textarea>
           class="field"
           style="margin-bottom:0">
 
-          <input type="date">
+          <input id="dataAssinaturaSetor" type="date">
 
         </div>
 
@@ -2781,7 +2784,7 @@ Conteúdo 1: [nome]"></textarea>
           class="field"
           style="text-align:left;margin-bottom:6px">
 
-          <input
+          <input id="nomeValidadorDGP"
             type="text"
             placeholder="Nome">
 
@@ -2792,7 +2795,7 @@ Conteúdo 1: [nome]"></textarea>
           class="field"
           style="margin-bottom:0">
 
-          <input type="date">
+          <input id="dataValidacaoDGP" type="date">
 
         </div>
 
@@ -4053,7 +4056,7 @@ function setTipoQ(tipoSelecionado){
       label +
       '</div>' +
 
-      '<textarea ' +
+      '<textarea id="questao_' + i + '" ' +
 
       (i <= 6 ? 'required' : '') +
 
