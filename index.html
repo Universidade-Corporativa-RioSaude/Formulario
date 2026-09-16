@@ -3524,39 +3524,90 @@ function coletarDadosFormulario() {
 }
 
 function enviarParaGoogleSheets(dados) {
-  if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.indexOf('/exec') === -1) {
-    alert('A integração ainda não foi configurada. Cole a URL /exec do Google Apps Script no index.html.');
+
+  if (!GOOGLE_SCRIPT_URL || !GOOGLE_SCRIPT_URL.includes('/exec')) {
+    alert(
+      'A integração ainda não foi configurada. ' +
+      'Verifique a URL /exec do Google Apps Script.'
+    );
     return false;
   }
 
   const payload = JSON.stringify(dados);
 
   try {
+
+    /*
+     * Envia JSON puro.
+     *
+     * text/plain é utilizado para evitar problemas de CORS/preflight
+     * quando o formulário está hospedado fora do Apps Script.
+     */
+
+    const blob = new Blob(
+      [payload],
+      {
+        type: 'text/plain;charset=UTF-8'
+      }
+    );
+
     if (navigator.sendBeacon) {
-      const blob = new Blob(
-        ['payload=' + encodeURIComponent(payload)],
-        { type: 'application/x-www-form-urlencoded;charset=UTF-8' }
+
+      const enviado = navigator.sendBeacon(
+        GOOGLE_SCRIPT_URL,
+        blob
       );
 
-      if (navigator.sendBeacon(GOOGLE_SCRIPT_URL, blob)) {
+      if (enviado) {
+        console.log('Dados enviados via sendBeacon.');
         return true;
       }
+
     }
+
   } catch (erroBeacon) {
-    console.warn('sendBeacon falhou; tentando fetch.', erroBeacon);
+
+    console.warn(
+      'sendBeacon falhou. Tentando fetch...',
+      erroBeacon
+    );
+
   }
 
+
+  /*
+   * Fallback usando fetch
+   */
+
   fetch(GOOGLE_SCRIPT_URL, {
+
     method: 'POST',
+
     mode: 'no-cors',
+
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+      'Content-Type': 'text/plain;charset=UTF-8'
     },
-    body: 'payload=' + encodeURIComponent(payload),
+
+    body: payload,
+
     keepalive: true
-  }).catch(function(erroFetch) {
-    console.error('Falha no envio ao Google Apps Script:', erroFetch);
+
+  })
+  .then(function() {
+
+    console.log('Dados enviados via fetch.');
+
+  })
+  .catch(function(erroFetch) {
+
+    console.error(
+      'Falha no envio ao Google Apps Script:',
+      erroFetch
+    );
+
   });
+
 
   return true;
 }
